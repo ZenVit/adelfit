@@ -1,0 +1,1019 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adelfit</title>
+<meta name="description" content="Adelfit: suplemento alimentario de Natural Caps, en frascos de 60 cápsulas. Envío gratis a todo el país, pagás al recibir.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<!--
+  PLANTILLA DE LANDING (estructura analizada de una página de referencia)
+  ------------------------------------------------------------------------
+  Todo lo que cambia por producto está en el objeto CONFIG (más abajo, en <script>).
+  Imágenes: poné tus archivos en ./img/ con los nombres de CONFIG (ver img/LEEME.txt).
+  Si falta una imagen se muestra un recuadro gris con la medida recomendada.
+-->
+<style>
+:root{
+  --brand:#26823c;        /* verde Adelfit: ticker, acentos, precios */
+  --brand-soft:#e7f2df;   /* verde suave: fondos de sección */
+  --brand-dark:#19592b;
+  --cta:#1faa59;          /* verde WhatsApp: botón de compra */
+  --ok:#53af01;           /* tildes verdes */
+  --star:#ffcc00;
+  --text:#121212;
+  --muted:#5b5b66;
+  --bg:#ffffff;
+  --card:#ffffff;
+  --line:#ececf1;
+  --radius:12px;
+  --gallery-ratio:4/5;   /* 4/5 si tus fotos son verticales */
+  --maxw:1100px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Poppins,system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
+h2{font-size:clamp(22px,5vw,30px);font-weight:700;line-height:1.2;text-align:center}
+.lead{color:var(--muted);text-align:center;max-width:640px;margin:10px auto 0}
+.on-brand h2{color:#143c22}
+.on-brand .lead{color:#3e6247}
+section{padding:40px 0}
+.divider{height:30px}
+
+/* ---------- Ticker ---------- */
+.ticker{background:var(--brand);color:#fff;overflow:hidden;white-space:nowrap;height:40px;display:flex;align-items:center;font-size:13px;font-weight:600;letter-spacing:.3px}
+.ticker.soft{background:#1f1a17}
+.ticker__track{display:inline-flex;gap:40px;padding-left:100%;animation:tick 28s linear infinite}
+.ticker:hover .ticker__track{animation-play-state:paused}
+@keyframes tick{to{transform:translateX(-100%)}}
+@media (prefers-reduced-motion:reduce){.ticker__track{animation:none;padding-left:16px}}
+
+/* ---------- Imagen placeholder ---------- */
+.ph{background:#f1eef3;color:#8b8796;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13px;font-weight:500;aspect-ratio:1/1;width:100%}
+
+/* ---------- Hero / producto ---------- */
+.hero{padding:20px 0 30px}
+.hero__grid{display:grid;gap:28px}
+@media (min-width:900px){.hero__grid{grid-template-columns:1.05fr 1fr;align-items:start}.gallery{position:sticky;top:16px}}
+.gallery__main{position:relative;border-radius:var(--radius);overflow:hidden;background:#faf7f9}
+.gallery__main img,.gallery__main .ph{aspect-ratio:var(--gallery-ratio);object-fit:cover;width:100%}
+.gallery__badges{position:absolute;top:12px;left:12px;display:flex;flex-direction:column;gap:6px}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;color:#fff;background:var(--brand)}
+.badge.dark{background:#2e2a39}
+.gallery__thumbs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:10px}
+.gallery__thumbs button{border:2px solid transparent;border-radius:8px;overflow:hidden;padding:0;background:none;cursor:pointer}
+.gallery__thumbs button[aria-current="true"]{border-color:var(--brand)}
+.gallery__thumbs img,.gallery__thumbs .ph{aspect-ratio:var(--gallery-ratio);object-fit:cover;font-size:0}
+.viewers{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:8px}
+.viewers b{color:var(--text)}
+.dot{width:8px;height:8px;border-radius:50%;background:#e0245e;box-shadow:0 0 0 0 rgba(224,36,94,.6);animation:pulse 1.6s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(224,36,94,0)}100%{box-shadow:0 0 0 0 rgba(224,36,94,0)}}
+.title{font-size:clamp(24px,5.5vw,32px);font-weight:700;line-height:1.2}
+.proof{display:flex;align-items:center;gap:8px;margin:8px 0 14px;font-size:14px;color:var(--muted)}
+.stars{color:var(--star);letter-spacing:1px}
+.chips{display:grid;gap:8px;margin-bottom:16px}
+.chip{display:flex;gap:12px;align-items:center;background:#f0f6e9;border-radius:10px;padding:10px 12px}
+.chip__ico{font-size:22px;width:32px;text-align:center}
+.chip b{display:block;font-size:14px}
+.chip span{font-size:13px;color:var(--muted)}
+.price{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px}
+.price__now{font-size:28px;font-weight:800;color:var(--brand)}
+.price__old{font-size:17px;color:#9a97a3;text-decoration:line-through}
+.price__save{background:#2e2a39;color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+.countdown{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#2e2a39;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:13px;font-weight:600}
+.countdown__time{font-variant-numeric:tabular-nums;font-size:20px;font-weight:800;letter-spacing:1px}
+
+/* ---------- Ofertas (combos) ---------- */
+.offers{display:grid;gap:10px;margin-bottom:16px}
+.offer{position:relative;display:flex;align-items:center;gap:12px;border:2px solid var(--line);border-radius:12px;padding:14px 12px;cursor:pointer;background:#fff;transition:border-color .15s,background .15s}
+.offer input{accent-color:var(--brand);width:18px;height:18px;flex:none}
+.offer[data-checked="true"]{border-color:var(--brand);background:#fff6ef}
+.offer__body{flex:1;min-width:0}
+.offer__title{font-weight:700;font-size:15px}
+.offer__sub{font-size:12px;color:var(--muted)}
+.offer__save{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--ok);border-radius:6px;padding:2px 8px;margin-top:4px}
+.offer__prices{text-align:right}
+.offer__img{width:58px;height:58px;border-radius:10px;object-fit:cover;flex:none;background:#141414}
+@media (max-width:360px){.offer__img{width:46px;height:46px}}
+.offer__prices b{display:block;font-size:16px}
+.offer__prices s{font-size:13px;color:#9a97a3}
+.offer__tag{position:absolute;top:-11px;right:12px;font-size:11px;font-weight:700;background:var(--brand);color:#fff;border-radius:999px;padding:2px 10px}
+
+/* ---------- Formulario contra entrega ---------- */
+.cod{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff}
+.cod h3{font-size:16px;text-align:center;margin-bottom:12px}
+.field{margin-bottom:10px}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.field input,.field select{width:100%;font:inherit;font-size:15px;padding:12px;border:1px solid #d8d6de;border-radius:10px;background:#fff;color:var(--text)}
+.field input:focus,.field select:focus{outline:2px solid var(--brand-soft);border-color:var(--brand)}
+.field .err{display:none;color:#c0233b;font-size:12px;margin-top:3px}
+.field.invalid .err{display:block}
+.field.invalid input,.field.invalid select{border-color:#c0233b}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:13px;margin:6px 0 14px}
+.check input{margin-top:3px;accent-color:var(--brand);width:18px;height:18px;flex:none}
+.cta{display:block;width:100%;border:0;cursor:pointer;font:inherit;font-size:17px;font-weight:800;color:#fff;background:var(--cta);border-radius:10px;padding:16px 12px;text-transform:uppercase;letter-spacing:.3px;animation:shake 4s ease-in-out infinite}
+.cta:disabled{opacity:.6;cursor:wait;animation:none}
+@keyframes shake{0%,90%,100%{transform:none}92%{transform:translateX(-3px)}94%{transform:translateX(3px)}96%{transform:translateX(-2px)}98%{transform:translateX(2px)}}
+@media (prefers-reduced-motion:reduce){.cta{animation:none}}
+.trust{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);margin-top:12px}
+.form-msg{display:none;text-align:center;font-weight:600;padding:14px;border-radius:10px;margin-top:12px}
+.form-msg.ok{display:block;background:#eaf7df;color:#2f6b00}
+.form-msg.bad{display:block;background:#fde8ec;color:#a0172f}
+.form-msg a{color:inherit;font-weight:800}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* ---------- Checkout (ventana) ---------- */
+.buy{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff}
+.buy .cta{margin-top:14px}
+.checkout{border:0;padding:0;margin:auto;width:min(520px,100%);max-height:100dvh;border-radius:16px;background:#fff;color:var(--text);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.checkout::backdrop{background:rgba(20,16,14,.6)}
+@media (max-width:560px){.checkout{margin:auto 0 0;max-width:100%;border-radius:16px 16px 0 0;max-height:94dvh}}
+.checkout__head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;background:#fff;border-bottom:1px solid var(--line)}
+.checkout__head h2{font-size:17px}
+.checkout__close{border:0;background:#f3f1f4;width:34px;height:34px;border-radius:50%;font-size:20px;line-height:1;cursor:pointer;color:var(--text)}
+.checkout .cod{border:0;border-radius:0;padding:16px}
+.checkout .offers{margin-bottom:14px}
+#ctaBtn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:13px 12px;text-transform:none;letter-spacing:0;box-shadow:0 6px 18px rgba(31,170,89,.35)}
+#ctaBtn .cta__main{font-size:18px;font-weight:800;text-transform:uppercase;letter-spacing:.3px}
+#ctaBtn .cta__sub{font-size:12.5px;font-weight:600;opacity:.95}
+.cta-perks{list-style:none;margin:12px 0 0;padding:10px 12px;display:grid;gap:5px;font-size:12.5px;color:var(--muted);background:#f6faf3;border-radius:10px}
+.cta-perks b{color:var(--text)}
+.city-other{margin-top:8px}
+.field select:disabled{background:#f4f3f6;color:#9a97a3}
+.order-sum{border:1px solid var(--line);border-radius:12px;background:#fffaf6;padding:12px 14px;margin:6px 0 14px}
+.order-sum h4{font-size:14px;margin-bottom:10px}
+.order-sum__item{display:flex;gap:10px;align-items:center;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+.order-sum__item img{width:52px;height:52px;object-fit:cover;border-radius:8px;flex:none;background:#fff}
+.order-sum__item div{flex:1;min-width:0;display:flex;flex-direction:column;font-size:13px;color:var(--muted)}
+.order-sum__item div b{color:var(--text);font-size:14px}
+.order-sum dl{display:grid;grid-template-columns:1fr auto;gap:6px 12px;padding-top:10px;font-size:13px}
+.order-sum dt{color:var(--muted)}
+.order-sum dd{text-align:right;font-weight:600}
+.order-sum .free,.order-sum dd.sum-save{color:var(--ok)}
+.order-sum .total{font-size:17px;font-weight:800;color:var(--text);padding-top:6px;border-top:1px solid var(--line)}
+.order-sum dd.total{color:var(--brand-dark)}
+.map-field small{font-weight:400;color:var(--muted)}
+.geo-btn{width:100%;border:1.5px solid var(--brand);background:#fff6ef;color:var(--brand-dark);font:inherit;font-weight:700;font-size:14px;border-radius:10px;padding:11px;cursor:pointer;margin-bottom:8px}
+.geo-btn:disabled{opacity:.6;cursor:wait}
+.pick-map{height:220px;border-radius:10px;border:1px solid #d8d6de;overflow:hidden;background:#eef0f2;z-index:0}
+.map-hint{font-size:12px;color:var(--muted);margin-top:5px}
+.map-hint.ok{color:var(--ok);font-weight:600}
+.map-hint.bad{color:#c0233b}
+.map-hint.approx{color:var(--brand-dark);font-weight:600}
+.pin-ok{border:0;background:var(--ok);color:#fff;font:inherit;font-size:12px;font-weight:700;border-radius:999px;padding:4px 10px;margin:2px 2px;cursor:pointer}
+.done{padding:22px 16px 20px}
+.done__top{text-align:center;margin-bottom:16px}
+.done__check{width:58px;height:58px;margin:0 auto 10px;border-radius:50%;background:var(--ok);color:#fff;font-size:30px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px #e7f6dc;animation:pop .45s ease-out}
+@keyframes pop{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.12)}100%{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.done__check{animation:none}}
+.done__top h3{font-size:21px;margin-bottom:4px}
+.done__top p{color:var(--muted);font-size:14px}
+.done__id{display:inline-block;background:#fff6ef;color:var(--brand-dark);font-weight:800;border-radius:8px;padding:5px 12px;margin-top:10px;font-size:14px}
+.receipt{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.receipt__item{display:flex;gap:12px;align-items:center;padding:12px;background:#fffaf6}
+.receipt__item img{width:62px;height:62px;object-fit:cover;border-radius:10px;flex:none}
+.receipt__item b{display:block;font-size:14px}
+.receipt__item span{font-size:13px;color:var(--muted)}
+.receipt dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;padding:12px;font-size:13px;border-top:1px solid var(--line)}
+.receipt dt{color:var(--muted)}
+.receipt dd{text-align:right;font-weight:600;overflow-wrap:anywhere}
+.receipt .total{font-size:16px;color:var(--brand-dark)}
+.steps{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:10px}
+.steps li{display:flex;gap:12px;align-items:flex-start;font-size:13px}
+.steps i{flex:none;width:28px;height:28px;border-radius:50%;background:var(--brand-soft);color:var(--brand-dark);font-style:normal;font-weight:800;display:flex;align-items:center;justify-content:center}
+.steps b{display:block;font-size:14px}
+.steps span{color:var(--muted)}
+.tip{background:#f4faef;border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:14px}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border-radius:10px;padding:14px;font-weight:800;font-size:15px;color:#fff;background:#25d366;text-decoration:none;margin-bottom:8px}
+.wa-note{text-align:center;font-size:12px;color:var(--muted);margin:-2px 0 16px}
+.ghost{display:block;width:100%;border:0;background:none;font:inherit;font-size:14px;font-weight:600;color:var(--muted);padding:10px;cursor:pointer}
+
+/* ---------- Mini testimonios del hero ---------- */
+.mini-revs{margin-top:22px}
+.mini-revs__head{text-align:center;font-size:14px;font-weight:600;margin-bottom:10px}
+.mini-revs__head span{display:block;font-weight:400;color:var(--muted);font-size:13px}
+.hscroll{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+.hscroll::-webkit-scrollbar{height:4px}.hscroll::-webkit-scrollbar-thumb{background:var(--brand-soft);border-radius:4px}
+.mini-rev{flex:0 0 78%;max-width:260px;scroll-snap-align:start;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:13px;background:#fff}
+.mini-rev b{font-size:13px}.mini-rev .ver{color:var(--ok);font-weight:700}
+
+/* ---------- Banners de imagen (pares) ---------- */
+.banner{display:grid;grid-template-columns:1fr;gap:0}
+@media (min-width:768px){.banner{grid-template-columns:1fr 1fr}}
+.banner img,.banner .ph{width:100%;aspect-ratio:4/5;object-fit:cover}
+.banner .only-desktop{display:none}
+@media (min-width:768px){.banner .only-desktop{display:block}}
+.banner{cursor:pointer}
+@media (min-width:768px){.banner.single{grid-template-columns:1fr;max-width:560px;margin:0 auto}}
+
+/* ---------- Dolores ---------- */
+.pain__kicker{display:block;text-align:center;font-size:12px;font-weight:800;letter-spacing:1.5px;color:var(--brand);margin-bottom:6px}
+.pain h2{font-weight:900;font-size:clamp(20px,5vw,28px)}
+.pain__list{display:grid;gap:12px;margin-top:22px;max-width:640px;margin-inline:auto}
+@media (min-width:768px){.pain__list{grid-template-columns:repeat(3,1fr);max-width:none}}
+.pain__item{display:flex;gap:12px;align-items:center;background:#f0f6e9;border-left:4px solid var(--brand);border-radius:10px;padding:16px}
+.pain__item i{font-style:normal;font-size:26px}
+.pain__item p{font-weight:600;font-size:14px}
+
+/* ---------- Pestañas ---------- */
+.tabs__bar{display:flex;gap:8px;overflow-x:auto;margin:20px 0 18px;padding-bottom:4px;justify-content:flex-start}
+@media (min-width:768px){.tabs__bar{justify-content:center}}
+.tabs__bar button{flex:none;font:inherit;font-size:13px;font-weight:600;border:1px solid var(--brand-soft);background:#fff;color:var(--text);padding:9px 14px;border-radius:999px;cursor:pointer}
+.tabs__bar button[aria-selected="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+.tabs__panel{max-width:720px;margin:0 auto;text-align:center}
+.tabs__panel h3{font-size:18px;margin-bottom:14px}
+.tabs__panel ul{list-style:none;display:grid;gap:8px;margin:0 auto 14px;max-width:420px;text-align:left}
+.tabs__panel li{background:#f0f6e9;border-radius:10px;padding:10px 14px;font-weight:500}
+.tabs__panel p{color:var(--muted)}
+
+/* ---------- Comparativa ---------- */
+.on-brand{background:var(--brand-soft)}
+.cmp{max-width:640px;margin:22px auto 0;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(150,70,20,.12)}
+.cmp table{width:100%;border-collapse:collapse;font-size:14px}
+.cmp th{padding:14px 8px;font-size:14px}
+.cmp th:nth-child(2){background:var(--brand);color:#fff}
+.cmp td{padding:13px 10px;border-top:1px solid var(--line)}
+.cmp td:nth-child(n+2){text-align:center;width:80px;font-size:18px}
+.cmp td:nth-child(2){background:#fff6ef}
+.yes{color:var(--ok);font-weight:900}.no{color:#b8b6bf;font-weight:900}
+
+/* ---------- Resultados ---------- */
+.stats{display:grid;gap:12px;margin-top:22px;grid-template-columns:1fr 1fr}
+@media (min-width:768px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{background:#fff;border-radius:14px;padding:18px 14px;text-align:center}
+.stat b{display:block;font-size:34px;font-weight:800;color:var(--brand)}
+.stat p{font-size:13px;color:var(--muted)}
+.stats-note{font-size:12px;color:#3e6247;text-align:center;margin-top:14px}
+
+/* ---------- Reseñas ---------- */
+.revs__summary{display:grid;gap:18px;align-items:center;max-width:720px;margin:20px auto 22px}
+@media (min-width:640px){.revs__summary{grid-template-columns:auto 1fr}}
+.revs__score{text-align:center}
+.revs__score b{font-size:44px;font-weight:800;line-height:1}
+.bars{display:grid;gap:6px;font-size:13px}
+.bar{display:grid;grid-template-columns:62px 1fr 34px;gap:8px;align-items:center}
+.bar div{height:8px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar div i{display:block;height:100%;background:var(--star)}
+.revs__grid{columns:1;column-gap:12px}
+@media (min-width:640px){.revs__grid{columns:2}}
+@media (min-width:960px){.revs__grid{columns:3}}
+.rev{break-inside:avoid;border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px;background:#fff}
+.rev__head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--brand-soft);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none}
+.rev__meta{font-size:12px;color:var(--muted)}
+.rev__meta .ver{color:var(--ok);font-weight:600}
+.rev img{border-radius:8px;margin-top:8px}
+
+/* ---------- Footer ---------- */
+footer{background:#2e2a39;color:#e9e6ef;padding:36px 0 90px;font-size:14px}
+footer .cols{display:grid;gap:22px}
+@media (min-width:768px){footer .cols{grid-template-columns:repeat(3,1fr)}}
+footer h4{color:#fff;margin-bottom:8px}
+footer a{color:#e9e6ef;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .legal{border-top:1px solid #4a4558;margin-top:24px;padding-top:16px;font-size:12px;color:#b6b2c2;display:flex;flex-wrap:wrap;gap:12px}
+.disclaimer{font-size:12px;color:#b6b2c2;margin-top:12px}
+
+/* ---------- Flotantes ---------- */
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);box-shadow:0 -6px 20px rgba(0,0,0,.08);transform:translateY(110%);transition:transform .25s}
+.sticky-cta.show{transform:none}
+.sticky-cta .cta{padding:14px;font-size:15px}
+.toast{position:fixed;left:12px;bottom:84px;z-index:45;display:flex;gap:10px;align-items:center;max-width:300px;background:#fff;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.15);padding:10px 14px;font-size:13px;transform:translateX(calc(-100% - 24px));visibility:hidden;transition:transform .35s,visibility .35s}
+.toast.show{transform:none;visibility:visible}
+.wa-float{position:fixed;right:14px;bottom:84px;z-index:42;display:flex;align-items:center;gap:8px;padding:10px 16px 10px 12px;border-radius:999px;background:#25d366;color:#fff;font-weight:700;font-size:14px;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.22);animation:waPulse 2.4s ease-in-out infinite}
+.wa-float svg{width:26px;height:26px;flex:none}
+.wa-float:hover{background:#1ebe5b}
+@keyframes waPulse{0%,100%{box-shadow:0 6px 20px rgba(0,0,0,.22),0 0 0 0 rgba(37,211,102,.55)}50%{box-shadow:0 6px 20px rgba(0,0,0,.22),0 0 0 10px rgba(37,211,102,0)}}
+@media (prefers-reduced-motion:reduce){.wa-float{animation:none}}
+.to-top{position:fixed;right:14px;bottom:146px;z-index:41;width:40px;height:40px;border-radius:50%;border:0;background:var(--brand);color:#fff;font-size:18px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s}
+.to-top.show{opacity:1;pointer-events:auto}
+.gallery__note{font-size:11px;color:var(--muted);margin-top:9px}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #26823c;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.dot{animation:none}}
+</style>
+<!-- Meta Pixel: dataset "VENTA CAPI" de la cuenta VGSHOP PY Ventas. Purchase lleva eventID PY…:purchase,
+     el mismo que manda el servidor (meta_purchase_outbox), así Meta no la cuenta dos veces. -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2141006803281667');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', { content_name: 'Adelfit', content_type: 'product', value: 159000, currency: 'PYG' });
+</script>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=2141006803281667&ev=PageView&noscript=1"></noscript>
+</head>
+<body>
+
+<!-- 1. Ticker superior -->
+<div class="ticker" id="ticker1" aria-label="Beneficios de compra"></div>
+
+<!-- 2. Hero / ficha de producto + formulario -->
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div class="gallery">
+      <div class="gallery__main" id="galleryMain">
+        <div class="gallery__badges" id="badges"></div>
+      </div>
+      <div class="gallery__thumbs" id="thumbs"></div><p class="gallery__note">Imágenes ilustrativas. La última foto muestra la etiqueta real del producto.</p>
+    </div>
+
+    <div>
+      <div class="viewers" id="viewers"><span class="dot"></span><span><b id="viewersN">12</b> personas viendo este producto</span></div>
+      <h1 class="title" id="pTitle"></h1>
+      <div class="proof"><span class="stars" id="pStars">★★★★★</span><span id="pProof"></span></div>
+      <div class="chips" id="chips"></div>
+
+      <div class="price">
+        <span class="price__now" id="priceNow"></span>
+        <span class="price__old" id="priceOld"></span>
+        <span class="price__save" id="priceSave"></span>
+      </div>
+
+      <div class="countdown" id="countdown">
+        <span>⏳ LA OFERTA TERMINA EN</span>
+        <span class="countdown__time" id="cdTime">--:--</span>
+      </div>
+
+      <div class="buy" id="buyBox">
+        <div class="offers" id="offers" role="radiogroup" aria-label="Elegí tu oferta"></div>
+        <button class="cta" id="buyBtn" type="button">Comprar ahora – pago al recibir</button>
+        <div class="trust"><span>🚚 Envío gratis a todo el país</span><span>💵 Pagás al recibir</span><span>🔒 Compra segura</span></div>
+      </div>
+
+      <div class="mini-revs">
+        <div class="mini-revs__head" id="miniHead"></div>
+        <div class="hscroll" id="miniRevs"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Checkout: se abre al tocar cualquier botón de compra -->
+<dialog class="checkout" id="checkout" aria-labelledby="checkoutTitle">
+  <div class="checkout__head"><h2 id="checkoutTitle">🛒 Finalizá tu pedido</h2><button class="checkout__close" type="button" id="checkoutClose" aria-label="Cerrar">×</button></div>
+      <form class="cod" id="orderForm" novalidate>
+        <div class="offers" id="offersModal" role="radiogroup" aria-label="Elegí tu oferta"></div>
+
+        <h3>🚚 Completá tus datos y pagá al recibir</h3>
+        <div class="field"><label for="fName">Nombre y apellido</label><input id="fName" name="name" autocomplete="name" placeholder="Ej: Ana López" required><div class="err">Escribí tu nombre.</div></div>
+        <div class="field"><label for="fPhone">Teléfono / WhatsApp</label><input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Ej: 0981 234 567" required><div class="err">Escribí un número válido.</div></div>
+        <div class="field"><label for="fDept">Departamento</label><select id="fDept" name="department" required></select><div class="err">Elegí tu departamento.</div></div>
+        <div class="field"><label for="fCity">Ciudad</label><select id="fCity" name="city" required disabled><option value="">Primero elegí el departamento</option></select>
+          <input id="fCityOther" class="city-other" autocomplete="address-level2" placeholder="Escribí tu ciudad" hidden><div class="err">Elegí tu ciudad.</div></div>
+        <div class="field"><label for="fAddr">Dirección</label><input id="fAddr" name="address" autocomplete="street-address" placeholder="Calle, número" required><div class="err">Escribí tu dirección.</div></div>
+        <div class="field map-field">
+          <label>📍 Ubicación de entrega <small>(así el delivery llega directo)</small></label>
+          <button type="button" class="geo-btn" id="geoBtn">📍 Usar mi ubicación actual</button>
+          <div class="pick-map" id="pickMap" aria-label="Mapa para marcar la ubicación de entrega"></div>
+          <p class="map-hint" id="mapHint">O tocá el mapa donde está tu casa. Podés arrastrar el pin.</p>
+        </div>
+        <div class="hp" aria-hidden="true"><label>No completar <input id="fWebsite" tabindex="-1" autocomplete="off"></label></div>
+        <div class="order-sum">
+          <h4>🧾 Resumen del pedido</h4>
+          <div class="order-sum__item"><img id="sumImg" alt="Adelfit"><div><b>Adelfit</b><span id="sumOffer"></span><span id="sumSub2"></span></div><b id="sumPrice"></b></div>
+          <dl>
+            <dt>Subtotal</dt><dd id="sumSubtotal"></dd>
+            <dt class="sum-save">Ahorro del combo</dt><dd class="sum-save" id="sumSave"></dd>
+            <dt>Envío</dt><dd class="free">Gratis</dd>
+            <dt>Pago</dt><dd>Al recibir</dd>
+            <dt class="total">Total</dt><dd class="total" id="sumTotal"></dd>
+          </dl>
+        </div>
+        <button class="cta" id="ctaBtn" type="submit">Confirmar pedido</button>
+        <ul class="cta-perks">
+          <li>🚚 <b>Envío gratis</b> a todo el país</li>
+          <li>💵 <b>No pagás nada ahora:</b> pagás cuando lo recibís</li>
+          <li>💬 Te confirmamos el pedido por WhatsApp</li>
+          <li>🔒 Tus datos solo se usan para la entrega</li>
+        </ul>
+        <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
+      </form>
+  <div class="done" id="checkoutDone" hidden>
+    <div class="done__top">
+      <div class="done__check" aria-hidden="true">✓</div>
+      <h3 id="doneTitle">¡Gracias! Recibimos tu pedido</h3>
+      <p><b>Último paso:</b> enviá el resumen por WhatsApp para que podamos recibir y confirmar tu pedido.</p>
+      <span class="done__id" id="doneId"></span>
+    </div>
+    <a class="wa-btn" id="doneWa" target="_blank" rel="noopener">✅ Confirmar mi pedido por WhatsApp</a>
+    <p class="wa-note">Se abre WhatsApp con el mensaje listo: solo tocá enviar.</p>
+    <div class="receipt">
+      <div class="receipt__item"><img id="doneImg" alt="Adelfit"><div><b id="doneProduct"></b><span id="doneOffer"></span></div></div>
+      <dl>
+        <dt>Entrega en</dt><dd id="doneAddr"></dd>
+        <dt>Envío</dt><dd id="doneShip"></dd>
+        <dt>Pago</dt><dd>Al recibir</dd>
+        <dt class="total">Total</dt><dd class="total" id="doneTotal"></dd>
+      </dl>
+    </div>
+    <ol class="steps">
+      <li><i>1</i><div><b>Confirmá por WhatsApp</b><span>Enviá el mensaje preparado y coordinamos tu pedido.</span></div></li>
+      <li><i>2</i><div><b>El delivery te contacta</b><span id="doneWindow"></span></div></li>
+      <li><i>3</i><div><b>Lo recibís y pagás</b><span>Le pagás al repartidor cuando te lo entrega.</span></div></li>
+    </ol>
+    <div class="tip">💊 <b>Antes de usarlo:</b> seguí el modo de empleo del fabricante y revisá los ingredientes y alérgenos del envase.</div>
+    <button class="ghost" type="button" id="doneClose">Seguir mirando</button>
+  </div>
+</dialog>
+
+<div class="divider"></div>
+<!-- 3. Banner de imágenes #1 -->
+<div class="banner" data-banner="0"></div>
+<div class="divider"></div>
+
+<!-- 4. Señales de alerta (dolores) -->
+<section class="pain">
+  <div class="wrap">
+    <span class="pain__kicker" id="painKicker"></span>
+    <h2 id="painTitle"></h2>
+    <div class="pain__list" id="painList"></div>
+  </div>
+</section>
+
+<div class="divider on-brand"></div>
+<!-- 5. Banners de imágenes #2 y #3 -->
+<div class="banner" data-banner="1"></div>
+<div class="divider on-brand"></div>
+<div class="banner" data-banner="2"></div>
+
+<!-- 6. Pestañas de contenido -->
+<section>
+  <div class="wrap">
+    <h2 id="tabsTitle"></h2>
+    <div class="tabs__bar" id="tabsBar" role="tablist"></div>
+    <div class="tabs__panel" id="tabsPanel" role="tabpanel"></div>
+  </div>
+</section>
+
+<!-- 7. Tabla comparativa -->
+<section class="on-brand">
+  <div class="wrap">
+    <h2 id="cmpTitle"></h2>
+    <p class="lead" id="cmpLead"></p>
+    <div class="cmp"><table id="cmpTable"></table></div>
+  </div>
+</section>
+
+<div class="divider on-brand"></div>
+<!-- 8. Banner de imágenes #4 -->
+<div class="banner" data-banner="3"></div>
+
+<!-- 9. Ticker inferior -->
+<div class="ticker soft" id="ticker2" aria-label="Mensajes de marca"></div>
+<div class="divider"></div>
+
+<!-- 10. Resultados en números -->
+<section class="on-brand" id="resultsSec">
+  <div class="wrap">
+    <h2 id="resTitle"></h2>
+    <p class="lead" id="resLead"></p>
+    <div class="stats" id="stats"></div>
+    <p class="stats-note" id="resNote"></p>
+  </div>
+</section>
+
+<!-- 11. Banner de imágenes #5 -->
+<div class="banner" data-banner="4"></div>
+<div class="divider on-brand"></div>
+
+<!-- 12. Reseñas -->
+<section id="reviews">
+  <div class="wrap">
+    <h2>Comentarios de los clientes</h2>
+    <div class="revs__summary">
+      <div class="revs__score"><b id="revScore"></b><div class="stars">★★★★★</div><div class="rev__meta" id="revCount"></div></div>
+      <div class="bars" id="revBars"></div>
+    </div>
+    <div class="revs__grid" id="revGrid"></div>
+  </div>
+</section>
+
+<!-- 13. Footer -->
+<footer>
+  <div class="wrap">
+    <div class="cols" id="footCols"></div>
+    <p class="disclaimer" id="disclaimer"></p>
+    <div class="legal" id="footLegal"></div>
+  </div>
+</footer>
+
+<!-- Flotantes -->
+<div class="sticky-cta" id="stickyCta"><button class="cta" type="button" id="stickyBtn">Pedir ahora – pago al recibir</button></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<a class="wa-float" id="waFloat" href="https://wa.me/595972738779" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2a13.1 13.1 0 0 0 6.6 1.8c7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.6l-.4-.3-3.8 1.2 1.2-3.7-.3-.4a10.4 10.4 0 0 1-1.7-5.8C5.1 10 10 5.3 16 5.3S26.9 10 26.9 15.8 22 26.4 16 26.4zm6-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.8 5 .8.4 1.4.6 1.9.7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg><span>Consultanos</span></a>
+<button class="to-top" id="toTop" type="button" aria-label="Volver arriba">↑</button>
+
+<script>
+/* =====================================================================
+   CONFIG — editá sólo esto para adaptar la landing a tu producto
+   ===================================================================== */
+const CONFIG = {
+  store: { name: "ZenVit Store", logo: "img/logo.webp", phone: "+595 972 738 779", email: "",
+           social: { WhatsApp: "https://wa.me/595972738779" } },
+  currency: { prefix: "Gs. ", locale: "es-PY" },
+
+  product: {
+    name: "Adelfit – Fórmula premium · Natural Caps",
+    proof: "Suplemento alimentario · 60 cápsulas por frasco",
+    badges: [],
+    images: ["img/producto-1.webp","img/producto-2.webp","img/producto-3.webp","img/combo-3.webp","img/etiqueta-real.jpg"],
+    chips: [
+      { icon: "🌿", title: "Con ingredientes de origen vegetal", text: "Psyllium, espirulina, FOS y extracto de naranja moro, entre otros ingredientes" },
+      { icon: "💊", title: "60 cápsulas por frasco", text: "Formato práctico para acompañar tu alimentación y tus hábitos" },
+      { icon: "🚚", title: "Envío gratis a todo el país", text: "Hacés tu pedido y pagás cuando lo recibís" }
+    ]
+  },
+
+  /* Precios del catálogo. compare = el mismo frasco comprado suelto (ahorro real del combo). */
+  offers: [
+    { id: "1u", title: "1 frasco · 60 cápsulas",   sub: "60 cápsulas en total", img: "img/producto-1.webp", qty: 1, price: 159000 },
+    { id: "2u", title: "2 frascos · 120 cápsulas", sub: "120 cápsulas en total", img: "img/combo-2.webp", qty: 2, price: 259000, compare: 318000, tag: "⭐ COMBO RECOMENDADO", default: true },
+    { id: "3u", title: "3 frascos · 180 cápsulas", sub: "180 cápsulas en total", img: "img/combo-3.webp", qty: 3, price: 320000, compare: 477000, tag: "🔥 MEJOR PRECIO" }
+  ],
+
+  countdownMinutes: 0,   // sin contador: no hay una oferta que venza
+  viewers: null,          // sin "personas viendo": no es un dato real
+
+  /* Pedido preparado en el navegador; el cliente lo envía por WhatsApp. */
+  order: { mode: "whatsapp", endpoint: "", whatsapp: "595972738779", webhookUrl: "", thankYouUrl: "" },
+
+  /* Departamento → ciudades de la lista. "Otra ciudad" deja escribirla. Asunción y Central: entrega 24 a 48 hs. */
+  departments: {
+    "Asunción": ["Asunción"],
+    "Central": ["Areguá","Capiatá","Fernando de la Mora","Guarambaré","Itá","Itauguá","J. Augusto Saldívar","Lambaré","Limpio","Luque",
+                "Mariano Roque Alonso","Nueva Italia","Ñemby","San Antonio","San Lorenzo","Villa Elisa","Villeta","Ypacaraí","Ypané"],
+    "Alto Paraguay": ["Fuerte Olimpo","Bahía Negra","Puerto Casado"],
+    "Alto Paraná": ["Ciudad del Este","Hernandarias","Presidente Franco","Minga Guazú","Santa Rita","Juan León Mallorquín","Itakyry","Naranjal","Los Cedrales"],
+    "Amambay": ["Pedro Juan Caballero","Capitán Bado","Bella Vista Norte"],
+    "Boquerón": ["Filadelfia","Loma Plata","Mariscal Estigarribia"],
+    "Caaguazú": ["Coronel Oviedo","Caaguazú","Dr. J. Eulogio Estigarribia","Repatriación","Yhú","Carayaó","San José de los Arroyos"],
+    "Caazapá": ["Caazapá","San Juan Nepomuceno","Yuty","Abaí","Tavaí"],
+    "Canindeyú": ["Salto del Guairá","Curuguaty","Katueté","La Paloma","Ygatimí","Corpus Christi"],
+    "Concepción": ["Concepción","Horqueta","Yby Yaú","Belén","Loreto"],
+    "Cordillera": ["Caacupé","Altos","Arroyos y Esteros","Atyrá","Emboscada","Eusebio Ayala","Piribebuy","San Bernardino","Tobatí","Itacurubí de la Cordillera"],
+    "Guairá": ["Villarrica","Coronel Martínez","Independencia","Iturbe","Mbocayaty","Paso Yobái"],
+    "Itapúa": ["Encarnación","Cambyretá","Bella Vista","Capitán Miranda","Capitán Meza","Carmen del Paraná","Coronel Bogado","Fram","Hohenau","María Auxiliadora","Natalio","Obligado"],
+    "Misiones": ["San Juan Bautista","San Ignacio","Santa Rosa","Ayolas","Santiago","San Miguel"],
+    "Ñeembucú": ["Pilar","Alberdi","Humaitá","Mayor Martínez"],
+    "Paraguarí": ["Paraguarí","Acahay","Caapucú","Carapeguá","Pirayú","Quiindy","Sapucai","Yaguarón","Ybycuí"],
+    "Presidente Hayes": ["Villa Hayes","Benjamín Aceval","Nanawa","Pozo Colorado","Puerto Pinasco"],
+    "San Pedro": ["San Pedro del Ycuamandiyú","Santa Rosa del Aguaray","San Estanislao","Choré","Guayaibí","Lima","Tacuatí"]
+  },
+
+  tickerTop: ["🚚 ENVÍO GRATIS A TODO EL PAÍS","💵 PAGÁS AL RECIBIR","📦 COMBOS DESDE 2 FRASCOS","💬 ATENCIÓN POR WHATSAPP"],
+  tickerBottom: ["🌿 ADELFIT NATURAL CAPS","💊 60 CÁPSULAS","📦 ELEGÍ TU COMBO","🚚 ENVÍO GRATIS","💵 PAGÁS AL RECIBIR"],
+
+  /* Banners: [imagen] o [imagen, imagen-escritorio]. Con una sola imagen, en computadora se centra.
+     Si la primera imagen no existe, el bloque se oculta solo. Tocar un banner abre el checkout. */
+  banners: [
+    ["img/producto-1.webp"],
+    ["img/producto-2.webp"],
+    ["img/producto-3.webp"],
+    ["img/combo-2.webp"],
+    ["img/combo-3.webp"]
+  ],
+  pain: {
+    kicker: "🌿 TUS HÁBITOS, TODOS LOS DÍAS",
+    title: "Una rutina que va con vos",
+    items: [
+      { icon: "🥗", text: "Acompañá una alimentación variada y equilibrada" },
+      { icon: "🚶", text: "Sumá movimiento y momentos de cuidado a tu día" },
+      { icon: "💊", text: "Consultá la etiqueta y elegí con información" }
+    ]
+  },
+  tabs: {
+    title: "🌿 Conocé Adelfit",
+    items: [
+      { label: "🌿 Composición", heading: "Ingredientes declarados en el envase",
+        list: ["Psyllium (Plantago ovata)","Espirulina (Arthrospira platensis)","Fructooligosacáridos (FOS)","Quitosana","Cromo","Ácido alfa-linolénico n-3 obtenido de Chlorella vulgaris","Extracto de naranja moro (Citrus sinensis L. Osbeck)"],
+        text: "La composición completa, incluidos los excipientes y los componentes de la cápsula, figura en la fotografía real de la etiqueta." },
+      { label: "📦 Presentación", heading: "Elegí la cantidad que va con vos",
+        list: ["1 frasco: 60 cápsulas","2 frascos: 120 cápsulas","3 frascos: 180 cápsulas","Envío gratis y pago al recibir en Paraguay"],
+        text: "Imágenes de presentación ilustrativas generadas a partir del envase original. Consultá también la foto real de la etiqueta en la galería." },
+      { label: "💊 Uso y precauciones", heading: "Leé la etiqueta antes de utilizarlo",
+        list: ["Seguí el modo de empleo indicado por el fabricante","No superes la cantidad diaria indicada","Declara derivados de crustáceos; puede contener piñón, soja, pescado y huevo","La cápsula contiene gelatina; no es apto para una dieta vegana"],
+        text: "Si tenés alergias, estás embarazada, en lactancia o tomás medicación, consultá con un profesional antes de utilizarlo. No sustituye una dieta variada ni un tratamiento médico." }
+    ]
+  },
+  comparison: {
+    title: "Elegí tu combo de Adelfit",
+    lead: "Los mismos frascos, con un mejor precio por unidad al llevar un combo.",
+    us: "Combo de 3", them: "1 frasco",
+    rows: [
+      ["60 cápsulas por frasco", true, true],
+      ["Producto Natural Caps", true, true],
+      ["Envío gratis", true, true],
+      ["Pago al recibir", true, true],
+      ["Ahorro frente a comprar por separado", true, false]
+    ]
+  },
+
+  /* Sin encuesta propia todavía: sección oculta. */
+  results: { show: false, title: "", lead: "", stats: [], note: "" },
+
+  /* Sin reseñas reales todavía: sección oculta. Cargá reseñas de clientes y poné show:true. */
+  reviews: { show: false, score: 0, distribution: [0, 0, 0, 0, 0], items: [], mini: 6 },
+
+  recentOrders: [],
+
+  stickyCta: true,
+  disclaimer: "Adelfit es un suplemento alimentario. No es un medicamento y no reemplaza una alimentación variada ni un tratamiento médico. Si estás embarazada, en lactancia o tomás medicación, consultá a tu médico.",
+  legal: []
+};
+
+/* =====================================================================
+   Lógica (no hace falta tocar)
+   ===================================================================== */
+const $ = id => document.getElementById(id);
+const money = n => CONFIG.currency.prefix + Number(n).toLocaleString(CONFIG.currency.locale);
+const pct = o => o.compare ? Math.round((1 - o.price / o.compare) * 100) : 0;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const store = { get(k){ try{ return localStorage.getItem(k) }catch(e){ return null } },
+                set(k,v){ try{ localStorage.setItem(k,v) }catch(e){} } };
+
+function img(src, alt, label, cls = "") {
+  const ph = `<div class='ph ${cls}'>${esc(label)}</div>`;
+  if (!src) return ph;
+  return `<img class="${cls}" src="${esc(src)}" alt="${esc(alt)}" loading="lazy" onerror="this.outerHTML=&quot;${ph.replace(/"/g,"&amp;quot;")}&quot;">`;
+}
+
+function ticker(el, items) {
+  const row = items.map(esc).join("&nbsp;&nbsp;•&nbsp;&nbsp;");
+  el.innerHTML = `<div class="ticker__track"><span>${row}</span><span aria-hidden="true">${row}</span></div>`;
+}
+
+/* --- Hero --- */
+const P = CONFIG.product;
+document.title = P.name;
+$("pTitle").textContent = P.name;
+$("pProof").textContent = P.proof;
+$("badges").innerHTML = P.badges.map(b => `<span class="badge ${b.dark ? "dark" : ""}">${esc(b.text)}</span>`).join("");
+$("chips").innerHTML = P.chips.map(c => `<div class="chip"><span class="chip__ico">${c.icon}</span><div><b>${esc(c.title)}</b><span>${esc(c.text)}</span></div></div>`).join("");
+
+let current = 0;
+function showImage(i) {
+  current = i;
+  const main = $("galleryMain");
+  main.querySelectorAll("img,.ph").forEach(n => n.remove());
+  main.insertAdjacentHTML("afterbegin", img(P.images[i], i === P.images.length - 1 ? "Fotografía real de ingredientes y alérgenos del envase de Adelfit" : P.name, `Foto ${i + 1}`));
+  main.querySelector("img")?.setAttribute("loading", "eager");
+  [...$("thumbs").children].forEach((b, j) => b.setAttribute("aria-current", j === i));
+}
+$("thumbs").style.gridTemplateColumns = `repeat(${Math.max(P.images.length, 5)}, 1fr)`;
+$("thumbs").innerHTML = P.images.map((s, i) => `<button type="button" aria-label="Ver foto ${i + 1}">${img(s, "", "")}</button>`).join("");
+[...$("thumbs").children].forEach((b, i) => b.addEventListener("click", () => showImage(i)));
+showImage(0);
+
+/* swipe en la foto principal */
+let x0 = null;
+$("galleryMain").addEventListener("touchstart", e => x0 = e.touches[0].clientX, { passive: true });
+$("galleryMain").addEventListener("touchend", e => {
+  if (x0 === null) return;
+  const dx = e.changedTouches[0].clientX - x0; x0 = null;
+  if (Math.abs(dx) > 40) showImage((current + (dx < 0 ? 1 : -1) + P.images.length) % P.images.length);
+});
+
+if (CONFIG.viewers) {
+  const [a, b] = CONFIG.viewers;
+  const tick = () => $("viewersN").textContent = a + Math.floor(Math.random() * (b - a + 1));
+  tick(); setInterval(tick, 7000);
+} else $("viewers").remove();
+
+/* --- Ofertas --- */
+let selected = CONFIG.offers.find(o => o.default) || CONFIG.offers[0];
+// Las mismas ofertas se muestran en la ficha y dentro del checkout.
+function renderOffers() {
+  ["offers", "offersModal"].forEach(box => {
+    $(box).innerHTML = CONFIG.offers.map(o => `
+    <label class="offer" data-checked="${o.id === selected.id}">
+      ${o.tag ? `<span class="offer__tag">${esc(o.tag)}</span>` : ""}
+      <input type="radio" name="${box}" value="${o.id}" ${o.id === selected.id ? "checked" : ""}>
+      ${o.img ? `<img class="offer__img" src="${esc(o.img)}" alt="" loading="lazy">` : ""}
+      <div class="offer__body"><div class="offer__title">${esc(o.title)}</div>${o.sub ? `<div class="offer__sub">${esc(o.sub)}</div>` : ""}${pct(o) ? `<span class="offer__save">Ahorrá ${pct(o)}%</span>` : ""}</div>
+      <div class="offer__prices"><b>${money(o.price)}</b>${o.compare ? `<s>${money(o.compare)}</s>` : ""}</div>
+    </label>`).join("");
+    $(box).querySelectorAll("input").forEach(inp => inp.addEventListener("change", () => {
+      selected = CONFIG.offers.find(o => o.id === inp.value); renderOffers(); updatePrice();
+    }));
+  });
+}
+function updatePrice() {
+  $("priceNow").textContent = money(selected.price);
+  $("priceOld").textContent = selected.compare ? money(selected.compare) : "";
+  $("priceSave").textContent = pct(selected) ? `Ahorrá ${pct(selected)}%` : "";
+  $("priceSave").hidden = !pct(selected);
+  $("buyBtn").textContent = `Comprar ahora – ${money(selected.price)}`;
+  const subtotal = selected.compare || selected.price;
+  $("sumImg").src = selected.img || P.images[0];
+  $("sumOffer").textContent = selected.title;
+  $("sumSub2").textContent = selected.sub || "";
+  $("sumPrice").textContent = money(selected.price);
+  $("sumSubtotal").textContent = money(subtotal);
+  $("sumSave").textContent = "– " + money(subtotal - selected.price);
+  document.querySelectorAll(".sum-save").forEach(el => el.hidden = subtotal === selected.price);
+  $("sumTotal").textContent = money(selected.price);
+  $("ctaBtn").innerHTML = `<span class="cta__main">✅ Confirmar mi pedido</span>` +
+    `<span class="cta__sub">${esc(selected.title)} · ${money(selected.price)}</span>`;
+}
+renderOffers(); updatePrice();
+
+/* --- Contador --- */
+if (CONFIG.countdownMinutes > 0) {
+  const key = "lp_cd_end";
+  let end = Number(store.get(key));
+  if (!end || end < Date.now()) { end = Date.now() + CONFIG.countdownMinutes * 60000; store.set(key, end); }
+  const cd = () => {
+    let s = Math.max(0, Math.round((end - Date.now()) / 1000));
+    if (s === 0) { end = Date.now() + CONFIG.countdownMinutes * 60000; store.set(key, end); }
+    $("cdTime").textContent = String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
+  };
+  cd(); setInterval(cd, 1000);
+} else $("countdown").remove();
+
+/* --- Formulario --- */
+const OTHER_CITY = "__otra";
+$("fDept").innerHTML = `<option value="">Elegí tu departamento…</option>` +
+  Object.keys(CONFIG.departments).map(d => `<option>${esc(d)}</option>`).join("");
+function fillCities() {
+  const list = CONFIG.departments[$("fDept").value];
+  const city = $("fCity");
+  city.disabled = !list;
+  city.innerHTML = !list ? `<option value="">Primero elegí el departamento</option>`
+    : (list.length > 1 ? `<option value="">Elegí tu ciudad…</option>` : "") +
+      list.map(c => `<option>${esc(c)}</option>`).join("") + `<option value="${OTHER_CITY}">Otra ciudad…</option>`;
+  toggleOtherCity();
+}
+function toggleOtherCity() {
+  const other = $("fCity").value === OTHER_CITY;
+  $("fCityOther").hidden = !other;
+  if (other) $("fCityOther").focus();
+}
+const cityValue = () => $("fCity").value === OTHER_CITY ? $("fCityOther").value.trim() : $("fCity").value;
+$("fDept").addEventListener("change", fillCities);
+$("fCity").addEventListener("change", toggleOtherCity);
+
+function validate() {
+  let ok = true;
+  const rules = {
+    fName: v => v.trim().length >= 3,
+    fPhone: v => !!localPhone(v),
+    fDept: v => !!v, fCity: () => cityValue().length >= 2, fAddr: v => v.trim().length >= 4
+  };
+  for (const [id, fn] of Object.entries(rules)) {
+    const f = $(id).closest(".field"), good = fn($(id).value);
+    f.classList.toggle("invalid", !good);
+    if (!good && ok) { $(id).focus(); ok = false; }
+  }
+  return ok;
+}
+
+/* --- Mapa de entrega (Leaflet + OpenStreetMap, se carga al abrir el checkout) --- */
+// url solo se llena con una ubicación confirmada (GPS, toque, arrastre o "Sí, es acá"):
+// el pin aproximado de la dirección escrita no se manda al delivery sin confirmar.
+const pick = { map: null, marker: null, url: "", loading: null, lastQuery: "" };
+function loadLeaflet() {
+  if (window.L) return Promise.resolve();
+  if (pick.loading) return pick.loading;
+  pick.loading = new Promise((ok, fail) => {
+    const css = document.createElement("link");
+    css.rel = "stylesheet"; css.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+    document.head.appendChild(css);
+    const js = document.createElement("script");
+    js.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+    js.onload = ok; js.onerror = fail;
+    document.head.appendChild(js);
+  });
+  return pick.loading;
+}
+function setPin(lat, lng, zoom, approx = false) {
+  const pos = [+lat.toFixed(6), +lng.toFixed(6)];
+  if (!pick.marker) {
+    pick.marker = L.marker(pos, { draggable: true }).addTo(pick.map);
+    pick.marker.on("dragend", () => { const p = pick.marker.getLatLng(); setPin(p.lat, p.lng); });
+  } else pick.marker.setLatLng(pos);
+  if (zoom) pick.map.setView(pos, zoom);
+  const hint = $("mapHint");
+  if (approx) {
+    pick.url = "";
+    hint.className = "map-hint approx";
+    hint.innerHTML = `📍 Ubicación aproximada según tu dirección. <button type="button" class="pin-ok" id="pinOk">✅ Sí, es acá</button> o arrastrá el pin hasta tu casa.`;
+    $("pinOk").addEventListener("click", () => { const p = pick.marker.getLatLng(); setPin(p.lat, p.lng); });
+    return;
+  }
+  pick.url = `https://www.google.com/maps?q=${pos[0]},${pos[1]}`;
+  hint.className = "map-hint ok"; hint.textContent = "✅ Ubicación marcada. Si no es exacta, arrastrá el pin.";
+}
+
+// Con ciudad y dirección escritas, el mapa va a la zona aproximada (OpenStreetMap Nominatim).
+let geoTimer = null;
+function scheduleGeocode() { clearTimeout(geoTimer); geoTimer = setTimeout(geocode, 1000); }
+async function geocode() {
+  if (pick.url) return;  // ya marcó su ubicación: no se la movemos
+  const city = cityValue(), addr = $("fAddr").value.trim(), dept = $("fDept").value;
+  if (city.length < 3) return;
+  const region = dept === city ? "" : dept;
+  const tries = [[addr, city, region], [city, region]].map(p => p.filter(Boolean).concat("Paraguay").join(", "));
+  if (addr.length < 4) tries.shift();
+  for (const [i, q] of tries.entries()) {
+    if (q === pick.lastQuery) return;
+    try {
+      const r = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=py&accept-language=es&q=${encodeURIComponent(q)}`);
+      const hit = (await r.json())[0];
+      if (!hit) continue;
+      pick.lastQuery = q;
+      await initMap();
+      if (window.L && pick.map && !pick.url) setPin(+hit.lat, +hit.lon, i === 0 && addr.length >= 4 ? 17 : 14, true);
+      return;
+    } catch { return; }
+  }
+}
+["fCityOther", "fAddr"].forEach(id => $(id).addEventListener("input", scheduleGeocode));
+["fDept", "fCity"].forEach(id => $(id).addEventListener("change", scheduleGeocode));
+async function initMap() {
+  try { await loadLeaflet(); } catch { $("mapHint").textContent = "No se pudo cargar el mapa. Podés seguir sin marcar la ubicación."; return; }
+  if (pick.map) { pick.map.invalidateSize(); return; }
+  pick.map = L.map("pickMap", { zoomControl: true, attributionControl: true }).setView([-25.2867, -57.647], 12);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "© OpenStreetMap" }).addTo(pick.map);
+  pick.map.on("click", e => setPin(e.latlng.lat, e.latlng.lng));
+  setTimeout(() => pick.map.invalidateSize(), 200);
+}
+$("geoBtn").addEventListener("click", () => {
+  const hint = $("mapHint"), btn = $("geoBtn");
+  if (!navigator.geolocation) { hint.className = "map-hint bad"; hint.textContent = "Tu teléfono no comparte la ubicación: tocá el mapa donde está tu casa."; return; }
+  btn.disabled = true; btn.textContent = "Buscando tu ubicación…";
+  navigator.geolocation.getCurrentPosition(async p => {
+    await initMap();
+    if (window.L && pick.map) setPin(p.coords.latitude, p.coords.longitude, 17);
+    btn.disabled = false; btn.textContent = "📍 Usar mi ubicación actual";
+  }, () => {
+    hint.className = "map-hint bad"; hint.textContent = "No pudimos obtener tu ubicación. Tocá el mapa donde está tu casa.";
+    btn.disabled = false; btn.textContent = "📍 Usar mi ubicación actual";
+  }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
+});
+function msg(t, good) { const m = $("formMsg"); m.textContent = t; m.className = "form-msg " + (good ? "ok" : "bad"); }
+// Celular paraguayo como 09XXXXXXXX, o "" si no es válido.
+function localPhone(v) {
+  let d = String(v).replace(/\D/g, "");
+  if (d.startsWith("00")) d = d.slice(2);
+  if (d.startsWith("595")) d = d.slice(3);
+  d = d.replace(/^0+/, "");
+  return /^9\d{8}$/.test(d) ? "0" + d : "";
+}
+const cookie = n => (document.cookie.match(new RegExp("(?:^|; )" + n + "=([^;]*)")) || [])[1] || "";
+function whatsappLink(order) {
+  const lines = [`Hola! Quiero hacer un pedido:`, `🛍️ ${order.product}`, `📦 ${order.offer} – ${money(order.total)}`,
+    `👤 ${order.name}`, `📞 ${order.phone}`, `📍 ${order.address}, ${order.city}, ${order.department}`,
+    order.maps && `🗺️ ${order.maps}`, `💵 Pago contra entrega`].filter(Boolean);
+  return `https://wa.me/${CONFIG.order.whatsapp}?text=${encodeURIComponent(lines.join("\n"))}`;
+}
+
+$("orderForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  $("formMsg").className = "form-msg";
+  if (!validate()) return;
+  const utm = new URLSearchParams(location.search);
+  const order = {
+    product: P.name, offer: selected.title, quantity: selected.qty, total: selected.price,
+    name: $("fName").value.trim(), phone: localPhone($("fPhone").value), department: $("fDept").value,
+    // En el panel el interior figura como "Interior": la ciudad lleva el departamento para no perderlo.
+    city: ["Asunción", "Central"].includes($("fDept").value) ? cityValue() : `${cityValue()}, ${$("fDept").value}`,
+    address: $("fAddr").value.trim(),
+    maps: pick.url, page: location.href
+  };
+  const btn = $("ctaBtn"); btn.disabled = true;
+  btn.querySelector(".cta__main").textContent = "⏳ Enviando tu pedido…";
+  try {
+    $("doneTitle").textContent = `¡${order.name.split(/\s+/)[0]}, tu pedido está listo!`;
+    $("doneId").hidden = true;
+    $("doneImg").src = P.images[0];
+    $("doneProduct").textContent = "Adelfit";
+    $("doneOffer").textContent = order.offer;
+    $("doneAddr").textContent = `${order.address}, ${order.city}`;
+    $("doneShip").textContent = "Gratis";
+    $("doneTotal").textContent = money(order.total);
+    $("doneWindow").textContent = "Coordinamos la fecha y el horario de entrega por WhatsApp.";
+    $("doneWa").href = whatsappLink(order);
+    dlg.scrollTop = 0;
+    $("orderForm").hidden = true;
+    $("checkoutDone").hidden = false;
+  } catch (err) {
+    msg("No pudimos preparar el pedido. Probá de nuevo.", false);
+  } finally { btn.disabled = false; updatePrice(); }
+});
+
+$("doneWa").addEventListener("click", () => {
+  if (window.fbq) fbq("track", "Contact", { content_name: "Adelfit", value: selected.price, currency: "PYG" });
+});
+
+/* --- Reseñas --- */
+const R = CONFIG.reviews;
+if (R.show === false) { $("reviews").remove(); document.querySelector(".mini-revs").remove(); $("pStars").remove(); }
+else {
+const total = R.distribution.reduce((a, b) => a + b, 0) || R.items.length;
+const initials = n => n.split(/\s+/).map(w => w[0]).join("").slice(0, 2).toUpperCase();
+const starStr = n => "★".repeat(n) + "☆".repeat(5 - n);
+$("miniHead").innerHTML = `${total}+ clientas compartieron su experiencia<span>Calificación promedio de ${R.score} estrellas</span>`;
+$("miniRevs").innerHTML = R.items.slice(0, R.mini).map(r => `<div class="mini-rev"><b>${esc(r.name)}</b> <span class="ver">✓</span><div class="stars">${starStr(r.stars)}</div>${esc(r.text)}</div>`).join("");
+$("revScore").textContent = R.score;
+$("revCount").textContent = `${total} reseñas`;
+$("revBars").innerHTML = R.distribution.map((n, i) => `<div class="bar"><span>${5 - i} estrellas</span><div><i style="width:${total ? n / total * 100 : 0}%"></i></div><span>${n}</span></div>`).join("");
+$("revGrid").innerHTML = R.items.map(r => `<article class="rev"><div class="rev__head"><span class="avatar">${initials(r.name)}</span><div><b>${esc(r.name)}</b><div class="rev__meta"><span class="ver">Compra verificada</span> · ${esc(r.when)}</div></div></div><div class="stars">${starStr(r.stars)}</div><p>${esc(r.text)}</p>${r.img ? img(r.img, "Foto de la clienta", "") : ""}</article>`).join("");
+}
+
+/* --- Secciones de contenido --- */
+ticker($("ticker1"), CONFIG.tickerTop);
+ticker($("ticker2"), CONFIG.tickerBottom);
+document.querySelectorAll("[data-banner]").forEach(el => {
+  const pair = CONFIG.banners[+el.dataset.banner];
+  if (!pair) return el.remove();
+  const probe = new Image();
+  probe.onload = () => {
+    el.innerHTML = `<img src="${esc(pair[0])}" alt="Presentación de Adelfit. Imagen ilustrativa." loading="lazy">` + (pair[1] ?
+      `<img class="only-desktop" src="${esc(pair[1])}" alt="" loading="lazy" onerror="this.onerror=null; this.src=this.previousElementSibling.src">` : "");
+    el.classList.toggle("single", !pair[1]);
+    el.addEventListener("click", openCheckout);
+  };
+  probe.onerror = () => el.remove();
+  probe.src = pair[0];
+});
+
+$("painKicker").textContent = CONFIG.pain.kicker;
+$("painTitle").textContent = CONFIG.pain.title;
+$("painList").innerHTML = CONFIG.pain.items.map(p => `<div class="pain__item"><i>${p.icon}</i><p>${esc(p.text)}</p></div>`).join("");
+
+$("tabsTitle").textContent = CONFIG.tabs.title;
+function showTab(i) {
+  const t = CONFIG.tabs.items[i];
+  [...$("tabsBar").children].forEach((b, j) => b.setAttribute("aria-selected", j === i));
+  $("tabsPanel").innerHTML = `<h3>${esc(t.heading)}</h3><ul>${t.list.map(l => `<li>${esc(l)}</li>`).join("")}</ul><p>${esc(t.text)}</p>`;
+}
+$("tabsBar").innerHTML = CONFIG.tabs.items.map(t => `<button type="button" role="tab">${esc(t.label)}</button>`).join("");
+[...$("tabsBar").children].forEach((b, i) => b.addEventListener("click", () => showTab(i)));
+showTab(0);
+
+const C = CONFIG.comparison;
+$("cmpTitle").textContent = C.title; $("cmpLead").textContent = C.lead;
+$("cmpTable").innerHTML = `<thead><tr><th></th><th>${esc(C.us)}</th><th>${esc(C.them)}</th></tr></thead><tbody>` +
+  C.rows.map(([t, a, b]) => `<tr><td>${esc(t)}</td><td class="${a ? "yes" : "no"}">${a ? "✓" : "✕"}</td><td class="${b ? "yes" : "no"}">${b ? "✓" : "✕"}</td></tr>`).join("") + "</tbody>";
+
+const RS = CONFIG.results;
+if (RS.show) {
+  $("resTitle").textContent = RS.title; $("resLead").textContent = RS.lead; $("resNote").textContent = RS.note;
+  $("stats").innerHTML = RS.stats.map(s => `<div class="stat"><b>${esc(s.value)}</b><p>${esc(s.text)}</p></div>`).join("");
+} else $("resultsSec").remove();
+
+/* --- Footer --- */
+const S = CONFIG.store;
+$("footCols").innerHTML = `
+  <div>${S.logo ? `<img src="${esc(S.logo)}" alt="${esc(S.name)}" width="96" style="border-radius:12px;margin-bottom:10px">` : ""}<h4>Contacto</h4><p>WhatsApp: ${esc(S.phone)}</p>${S.email ? `<p>Correo: ${esc(S.email)}</p>` : ""}</div>
+  <div><h4>Enlaces</h4>${Object.entries(S.social).map(([k, v]) => `<p><a href="${esc(v)}" target="_blank" rel="noopener">${esc(k)}</a></p>`).join("")}</div>
+  <div><h4>Formas de pago</h4><p>💵 Pago contra entrega</p><p>🚚 Envío gratis a todo el país</p></div>`;
+$("disclaimer").textContent = CONFIG.disclaimer;
+$("footLegal").innerHTML = `<span>© ${new Date().getFullYear()} ${esc(S.name)}</span>` + CONFIG.legal.map(([t, u]) => `<a href="${esc(u)}">${esc(t)}</a>`).join("");
+
+/* --- Flotantes --- */
+const dlg = $("checkout");
+function openCheckout() {
+  $("orderForm").hidden = false; $("checkoutDone").hidden = true; $("formMsg").className = "form-msg";
+  if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+  document.body.style.overflow = "hidden";
+  initMap();
+  if (window.fbq) fbq("track", "InitiateCheckout", { value: selected.price, currency: "PYG" });
+  if (window.zvVisitas) zvVisitas.track("begin_checkout");
+}
+const closeCheckout = () => dlg.close ? dlg.close() : dlg.removeAttribute("open");
+dlg.addEventListener("close", () => document.body.style.overflow = "");
+dlg.addEventListener("click", e => { if (e.target === dlg) closeCheckout(); });
+$("checkoutClose").addEventListener("click", closeCheckout);
+$("doneClose").addEventListener("click", closeCheckout);
+$("buyBtn").addEventListener("click", openCheckout);
+if (CONFIG.stickyCta) $("stickyBtn").addEventListener("click", openCheckout);
+else $("stickyCta").remove();
+addEventListener("scroll", () => {
+  const formBox = $("buyBox").getBoundingClientRect();
+  if (CONFIG.stickyCta) $("stickyCta").classList.toggle("show", formBox.bottom < 0);
+  $("toTop").classList.toggle("show", scrollY > 900);
+}, { passive: true });
+$("toTop").addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
+$("waFloat").href = `https://wa.me/${CONFIG.order.whatsapp}?text=${encodeURIComponent("Hola, quiero consultar por Adelfit")}`;
+$("waFloat").addEventListener("click", () => { if (window.fbq) fbq("track", "Contact", { content_name: "Adelfit" }); });
+
+if (CONFIG.recentOrders.length) {
+  let k = 0;
+  const show = () => {
+    const o = CONFIG.recentOrders[k++ % CONFIG.recentOrders.length];
+    $("toast").innerHTML = `<span style="font-size:22px">💕</span><span><b>${esc(o.name)}</b> de ${esc(o.city)} hizo su pedido</span>`;
+    $("toast").classList.add("show");
+    setTimeout(() => $("toast").classList.remove("show"), 5000);
+  };
+  setTimeout(show, 8000); setInterval(show, 25000);
+}
+</script>
+
+</body>
+</html>
