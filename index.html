@@ -397,7 +397,7 @@ fbq('track', 'ViewContent', { content_name: 'Adelfit', content_type: 'product', 
     <div class="done__top">
       <div class="done__check" aria-hidden="true">✓</div>
       <h3 id="doneTitle">¡Gracias! Recibimos tu pedido</h3>
-      <p><b>Último paso:</b> enviá el resumen por WhatsApp para que podamos recibir y confirmar tu pedido.</p>
+      <p><b>Último paso:</b> confirmalo por WhatsApp y te mandamos el resumen.</p>
       <span class="done__id" id="doneId"></span>
     </div>
     <a class="wa-btn" id="doneWa" target="_blank" rel="noopener">✅ Confirmar mi pedido por WhatsApp</a>
@@ -412,7 +412,7 @@ fbq('track', 'ViewContent', { content_name: 'Adelfit', content_type: 'product', 
       </dl>
     </div>
     <ol class="steps">
-      <li><i>1</i><div><b>Confirmá por WhatsApp</b><span>Enviá el mensaje preparado y coordinamos tu pedido.</span></div></li>
+      <li><i>1</i><div><b>Confirmá por WhatsApp</b><span>Te respondemos al instante con el resumen de tu pedido.</span></div></li>
       <li><i>2</i><div><b>El delivery te contacta</b><span id="doneWindow"></span></div></li>
       <li><i>3</i><div><b>Lo recibís y pagás</b><span>Le pagás al repartidor cuando te lo entrega.</span></div></li>
     </ol>
@@ -539,8 +539,9 @@ const CONFIG = {
   countdownMinutes: 0,   // sin contador: no hay una oferta que venza
   viewers: null,          // sin "personas viendo": no es un dato real
 
-  /* Pedido preparado en el navegador; el cliente lo envía por WhatsApp. */
-  order: { mode: "whatsapp", endpoint: "", whatsapp: "595972738779", webhookUrl: "", thankYouUrl: "" },
+  /* mode "panel": el pedido entra al panel (pedidos_web) y avisa por Telegram. Si falla, ofrece WhatsApp. */
+  order: { mode: "panel", endpoint: "https://roruinqorwgolcrhhmpm.supabase.co/functions/v1/create-adelfit-order",
+           whatsapp: "595972738779", webhookUrl: "", thankYouUrl: "" },
 
   /* Departamento → ciudades de la lista. "Otra ciudad" deja escribirla. Asunción y Central: entrega 24 a 48 hs. */
   departments: {
@@ -888,21 +889,59 @@ $("orderForm").addEventListener("submit", async e => {
   const btn = $("ctaBtn"); btn.disabled = true;
   btn.querySelector(".cta__main").textContent = "⏳ Enviando tu pedido…";
   try {
-    $("doneTitle").textContent = `¡${order.name.split(/\s+/)[0]}, tu pedido está listo!`;
-    $("doneId").hidden = true;
+    let orderId = "";
+    if (CONFIG.order.mode === "panel") {
+      const r = await fetch(CONFIG.order.endpoint, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          cantidad: order.quantity, nombre: order.name, telefono: order.phone, departamento: order.department,
+          ciudad: order.city, direccion: order.address, ubicacion_maps: order.maps,
+          website: $("fWebsite").value, landing_url: order.page, user_agent: navigator.userAgent,
+          utm_source: utm.get("utm_source") || "", utm_medium: utm.get("utm_medium") || "",
+          utm_campaign: utm.get("utm_campaign") || "", fbclid: utm.get("fbclid") || "",
+          meta_fbp: cookie("_fbp"), meta_fbc: cookie("_fbc")
+        })
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(data.error || "HTTP " + r.status);
+      orderId = data.orderId || "";
+    } else if (CONFIG.order.mode === "webhook" && CONFIG.order.webhookUrl) {
+      const r = await fetch(CONFIG.order.webhookUrl, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(order) });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+    } else {
+      window.open(whatsappLink(order), "_blank", "noopener");
+    }
+    if (window.fbq) fbq("track", "Purchase", { value: order.total, currency: "PYG", content_name: "Adelfit", content_type: "product", num_items: order.quantity }, orderId ? { eventID: orderId + ":purchase" } : undefined);
+    if (window.zvVisitas) zvVisitas.track("purchase", { orderId, revenue: order.total });
+    if (CONFIG.order.thankYouUrl) { location.href = CONFIG.order.thankYouUrl; return; }
+    const first = order.name.split(/\s+/)[0];
+    const local = ["Asunción", "Central"].includes(order.department);
+    $("doneTitle").textContent = `¡Gracias, ${first}! Recibimos tu pedido`;
+    $("doneId").textContent = orderId ? `Pedido N° ${orderId}` : "";
+    $("doneId").hidden = !orderId;
     $("doneImg").src = P.images[0];
     $("doneProduct").textContent = "Adelfit";
     $("doneOffer").textContent = order.offer;
     $("doneAddr").textContent = `${order.address}, ${order.city}`;
     $("doneShip").textContent = "Gratis";
     $("doneTotal").textContent = money(order.total);
-    $("doneWindow").textContent = "Coordinamos la fecha y el horario de entrega por WhatsApp.";
-    $("doneWa").href = whatsappLink(order);
+    $("doneWindow").textContent = `Coordina con vos la entrega en ${local ? "24 a 48 hs" : "48 a 72 hs, según la zona"}.`;
+    // El bot reconoce "confirmo mi pedido N° PY…" y responde el resumen (gratis: escribe el cliente).
+    const confirmText = orderId ? `Hola, confirmo mi pedido N° ${orderId}` : `Hola! Hice un pedido de Adelfit (${order.offer}) desde la página.`;
+    const waUrl = `https://wa.me/${CONFIG.order.whatsapp}?text=${encodeURIComponent(confirmText)}`;
+    $("doneWa").href = waUrl;
     dlg.scrollTop = 0;
-    $("orderForm").hidden = true;
-    $("checkoutDone").hidden = false;
+    $("orderForm").hidden = true; $("checkoutDone").hidden = false;
+    $("orderForm").reset(); renderOffers();
+    if (pick.marker) { pick.marker.remove(); pick.marker = null; }
+    fillCities();
+    pick.url = ""; pick.lastQuery = ""; $("mapHint").className = "map-hint"; $("mapHint").textContent = "O tocá el mapa donde está tu casa. Podés arrastrar el pin.";
+    // En el celular se abre WhatsApp solo; el botón queda por si el navegador no lo abre.
+    if (orderId && matchMedia("(pointer:coarse)").matches) setTimeout(() => { location.href = waUrl; }, 1500);
   } catch (err) {
-    msg("No pudimos preparar el pedido. Probá de nuevo.", false);
+    const m = $("formMsg");
+    m.className = "form-msg bad";
+    m.innerHTML = `No pudimos registrar el pedido. <a href="${esc(whatsappLink(order))}" target="_blank" rel="noopener">Envialo por WhatsApp</a> y lo cargamos nosotros.`;
   } finally { btn.disabled = false; updatePrice(); }
 });
 
@@ -1015,5 +1054,8 @@ if (CONFIG.recentOrders.length) {
 }
 </script>
 
+<!-- Visitas en vivo para el panel (Vista en tiempo real). -->
+<script src="zv-visitas.js?v=3" data-landing="landing_adelfit" data-product="ADELFIT"
+        data-endpoint="https://roruinqorwgolcrhhmpm.supabase.co/functions/v1/track-visitor" defer></script>
 </body>
 </html>
