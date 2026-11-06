@@ -311,6 +311,22 @@ footer .legal{border-top:1px solid #4a4558;margin-top:24px;padding-top:16px;font
 .gallery__note{font-size:11px;color:var(--muted);margin-top:9px;text-align:center}
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #26823c;outline-offset:3px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.dot{animation:none}}
+/* ---------- Descuento "antes de irte" ---------- */
+.exit{border:0;margin:auto;padding:20px 18px 10px;width:min(420px,calc(100% - 24px));max-height:calc(100dvh - 24px);border-radius:16px;background:#fff;color:var(--text);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.exit::backdrop{background:rgba(20,16,14,.6)}
+.exit__close{position:absolute;top:6px;right:8px;border:0;background:none;font-size:28px;line-height:1;color:var(--muted);cursor:pointer;padding:4px 8px}
+.exit__badge{display:inline-block;background:var(--brand);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+.exit h2{text-align:left;font-size:21px;line-height:1.25;margin:10px 30px 6px 0}
+.exit__lead{font-size:14px;color:var(--muted);margin:0 0 12px}
+.exit__opts{display:grid;gap:8px;margin-bottom:12px}
+.exit__opt{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;font:inherit;color:inherit;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer}
+.exit__opt[aria-checked="true"]{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand)}
+.exit__opt b{display:block;font-size:14px}
+.exit__opt small{display:block;font-size:12px;font-weight:700;color:var(--ok)}
+.exit__opt s{display:block;font-size:12px;color:#9a97a3;text-align:right}
+.exit__opt strong{display:block;font-size:16px;font-weight:800;color:var(--brand);text-align:right;white-space:nowrap}
+.offer__exit{display:block;margin-top:3px;font-size:12px;font-weight:700;color:var(--ok)}
+.order-sum dd.sum-exit{color:var(--ok)}
 </style>
 <!-- Meta Pixel: dataset "VENTA CAPI" de la cuenta VGSHOP PY Ventas. Purchase lleva eventID PY…:purchase,
      el mismo que manda el servidor (meta_purchase_outbox), así Meta no la cuenta dos veces. -->
@@ -396,6 +412,7 @@ fbq('track', 'ViewContent', { content_name: 'Adelfit', content_type: 'product', 
           <dl>
             <dt>Subtotal</dt><dd id="sumSubtotal"></dd>
             <dt class="sum-save">Ahorro del combo</dt><dd class="sum-save" id="sumSave"></dd>
+            <dt class="sum-exit">🎁 Descuento especial</dt><dd class="sum-exit" id="sumExit"></dd>
             <dt>Envío</dt><dd class="free">Gratis</dd>
             <dt>Pago</dt><dd>Al recibir</dd>
             <dt class="total">Total</dt><dd class="total" id="sumTotal"></dd>
@@ -436,6 +453,17 @@ fbq('track', 'ViewContent', { content_name: 'Adelfit', content_type: 'product', 
     <div class="tip">💊 <b>Antes de usarlo:</b> seguí el modo de empleo del fabricante y revisá los ingredientes y alérgenos del envase.</div>
     <button class="ghost" type="button" id="doneClose">Seguir mirando</button>
   </div>
+</dialog>
+
+<!-- Descuento "antes de irte": sale una sola vez cuando parece que la persona se va. -->
+<dialog class="exit" id="exitOffer" aria-labelledby="exitTitle">
+  <button class="exit__close" type="button" id="exitClose" aria-label="Cerrar">×</button>
+  <span class="exit__badge">🎁 Descuento especial</span>
+  <h2 id="exitTitle">¡Esperá! Tenemos un descuento para vos</h2>
+  <p class="exit__lead">Si hacés tu pedido ahora, te descontamos hasta Gs. 20.000. Pagás al recibir y el envío es gratis.</p>
+  <div class="exit__opts" id="exitOpts" role="radiogroup" aria-label="Elegí tu opción con descuento"></div>
+  <button class="cta" type="button" id="exitYes">Quiero mi descuento</button>
+  <button class="ghost" type="button" id="exitNo">No, gracias</button>
 </dialog>
 
 <div class="divider"></div>
@@ -704,6 +732,10 @@ if (CONFIG.viewers) {
 
 /* --- Ofertas --- */
 let selected = CONFIG.offers.find(o => o.default) || CONFIG.offers[0];
+// Descuento "antes de irte". Los montos los vuelve a fijar el servidor (create-*-order).
+const EXIT = { amounts: { 1: 10000, 2: 20000, 3: 20000 }, active: false, key: "zv_exit_" + (location.pathname.split("/").filter(Boolean)[0] || "landing").toLowerCase(), done: false };
+const exitOff = o => EXIT.active ? (EXIT.amounts[o.qty] || 0) : 0;
+const finalPrice = o => o.price - exitOff(o);
 // Las mismas ofertas se muestran en la ficha y dentro del checkout.
 function renderOffers() {
   ["offers", "offersModal"].forEach(box => {
@@ -712,8 +744,8 @@ function renderOffers() {
       ${o.tag ? `<span class="offer__tag">${esc(o.tag)}</span>` : ""}
       <input type="radio" name="${box}" value="${o.id}" ${o.id === selected.id ? "checked" : ""}>
       ${o.img ? `<img class="offer__img" src="${esc(MEDIA[o.img]?.variants[0].src || o.img)}" alt="" width="58" height="58" loading="lazy" decoding="async">` : ""}
-      <div class="offer__body"><div class="offer__title">${esc(o.title)}</div>${o.sub ? `<div class="offer__sub">${esc(o.sub)}</div>` : ""}${pct(o) ? `<span class="offer__save">Ahorrá ${pct(o)}%</span>` : ""}</div>
-      <div class="offer__prices"><b>${money(o.price)}</b>${o.compare ? `<s>${money(o.compare)}</s>` : ""}</div>
+      <div class="offer__body"><div class="offer__title">${esc(o.title)}</div>${o.sub ? `<div class="offer__sub">${esc(o.sub)}</div>` : ""}${pct(o) ? `<span class="offer__save">Ahorrá ${pct(o)}%</span>` : ""}${exitOff(o) ? `<span class="offer__exit">🎁 Descuento especial – ${money(exitOff(o))}</span>` : ""}</div>
+      <div class="offer__prices"><b>${money(finalPrice(o))}</b>${o.compare || exitOff(o) ? `<s>${money(o.compare || o.price)}</s>` : ""}</div>
     </label>`).join("");
     $(box).querySelectorAll("input").forEach(inp => inp.addEventListener("change", () => {
       selected = CONFIG.offers.find(o => o.id === inp.value); renderOffers(); updatePrice();
@@ -721,22 +753,24 @@ function renderOffers() {
   });
 }
 function updatePrice() {
-  $("priceNow").textContent = money(selected.price);
-  $("priceOld").textContent = selected.compare ? money(selected.compare) : "";
+  $("priceNow").textContent = money(finalPrice(selected));
+  $("priceOld").textContent = selected.compare || exitOff(selected) ? money(selected.compare || selected.price) : "";
   $("priceSave").textContent = pct(selected) ? `Ahorrá ${pct(selected)}%` : "";
   $("priceSave").hidden = !pct(selected);
-  $("buyBtn").textContent = `Comprar ahora – ${money(selected.price)}`;
+  $("buyBtn").textContent = `Comprar ahora – ${money(finalPrice(selected))}`;
   const subtotal = selected.compare || selected.price;
   $("sumImg").src = selected.img || P.images[0];
   $("sumOffer").textContent = selected.title;
   $("sumSub2").textContent = selected.sub || "";
-  $("sumPrice").textContent = money(selected.price);
+  $("sumPrice").textContent = money(finalPrice(selected));
   $("sumSubtotal").textContent = money(subtotal);
   $("sumSave").textContent = "– " + money(subtotal - selected.price);
   document.querySelectorAll(".sum-save").forEach(el => el.hidden = subtotal === selected.price);
-  $("sumTotal").textContent = money(selected.price);
+  $("sumExit").textContent = "– " + money(exitOff(selected));
+  document.querySelectorAll(".sum-exit").forEach(el => el.hidden = !exitOff(selected));
+  $("sumTotal").textContent = money(finalPrice(selected));
   $("ctaBtn").innerHTML = `<span class="cta__main">✅ Confirmar mi pedido</span>` +
-    `<span class="cta__sub">${esc(selected.title)} · ${money(selected.price)}</span>`;
+    `<span class="cta__sub">${esc(selected.title)} · ${money(finalPrice(selected))}</span>`;
 }
 renderOffers(); updatePrice();
 
@@ -896,7 +930,7 @@ $("orderForm").addEventListener("submit", async e => {
   if (!validate()) return;
   const utm = new URLSearchParams(location.search);
   const order = {
-    product: P.name, offer: selected.title, quantity: selected.qty, total: selected.price,
+    product: P.name, offer: selected.title, quantity: selected.qty, total: finalPrice(selected),
     name: $("fName").value.trim(), phone: localPhone($("fPhone").value), department: $("fDept").value,
     // En el panel el interior figura como "Interior": la ciudad lleva el departamento para no perderlo.
     city: ["Asunción", "Central"].includes($("fDept").value) ? cityValue() : `${cityValue()}, ${$("fDept").value}`,
@@ -916,12 +950,15 @@ $("orderForm").addEventListener("submit", async e => {
           website: $("fWebsite").value, landing_url: order.page, user_agent: navigator.userAgent,
           utm_source: utm.get("utm_source") || "", utm_medium: utm.get("utm_medium") || "",
           utm_campaign: utm.get("utm_campaign") || "", fbclid: utm.get("fbclid") || "",
-          meta_fbp: cookie("_fbp"), meta_fbc: cookie("_fbc")
+          meta_fbp: cookie("_fbp"), meta_fbc: cookie("_fbc"),
+          descuento: exitOff(selected) ? "salida" : ""
         })
       });
       const data = await r.json().catch(() => ({}));
       if (!r.ok) throw new Error(data.error || "HTTP " + r.status);
       orderId = data.orderId || "";
+      // El total que vale es el que guardó el servidor.
+      if (Number(data.total) > 0) order.total = Number(data.total);
     } else if (CONFIG.order.mode === "webhook" && CONFIG.order.webhookUrl) {
       const r = await fetch(CONFIG.order.webhookUrl, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(order) });
       if (!r.ok) throw new Error("HTTP " + r.status);
@@ -930,6 +967,7 @@ $("orderForm").addEventListener("submit", async e => {
     }
     if (window.fbq) fbq("track", "Purchase", { value: order.total, currency: "PYG", content_name: "Adelfit", content_type: "product", num_items: order.quantity }, orderId ? { eventID: orderId + ":purchase" } : undefined);
     if (window.zvVisitas) zvVisitas.track("purchase", { orderId, revenue: order.total });
+    EXIT.done = true; EXIT.active = false; store.set(EXIT.key + "_ok", "");
     if (CONFIG.order.thankYouUrl) { location.href = CONFIG.order.thankYouUrl; return; }
     const first = order.name.split(/\s+/)[0];
     const local = ["Asunción", "Central"].includes(order.department);
@@ -1025,7 +1063,7 @@ function openCheckout() {
   if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
   document.body.style.overflow = "hidden";
   initMap();
-  if (window.fbq) fbq("track", "InitiateCheckout", { value: selected.price, currency: "PYG" });
+  if (window.fbq) fbq("track", "InitiateCheckout", { value: finalPrice(selected), currency: "PYG" });
   if (window.zvVisitas) zvVisitas.track("begin_checkout");
 }
 const closeCheckout = () => dlg.close ? dlg.close() : dlg.removeAttribute("open");
@@ -1045,6 +1083,67 @@ addEventListener("scroll", () => {
 $("toTop").addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
 $("waFloat").href = `https://wa.me/${CONFIG.order.whatsapp}?text=${encodeURIComponent("Hola, quiero consultar por Adelfit")}`;
 $("waFloat").addEventListener("click", () => { if (window.fbq) fbq("track", "Contact", { content_name: "Adelfit" }); });
+
+/* --- Descuento "antes de irte" --- */
+// Sale una sola vez por persona, cuando parece que se va: el mouse sale por arriba (PC),
+// vuelve de otra app, sube rápido la página, se queda 40 s sin tocar nada o cierra el checkout sin comprar.
+const exitDlg = $("exitOffer");
+const EXIT_TTL = 24 * 3600e3;
+const exitStart = Date.now();
+let exitPick = selected;
+{ const ok = Number(store.get(EXIT.key + "_ok")); if (ok && Date.now() - ok < EXIT_TTL) { EXIT.active = true; renderOffers(); updatePrice(); } }
+function renderExit() {
+  $("exitOpts").innerHTML = CONFIG.offers.map(o => {
+    const off = EXIT.amounts[o.qty] || 0;
+    return `<button type="button" class="exit__opt" role="radio" aria-checked="${o.id === exitPick.id}" data-id="${o.id}">
+      <span><b>${esc(o.title)}</b><small>🎁 – ${money(off)}</small></span>
+      <span><s>${money(o.price)}</s><strong>${money(o.price - off)}</strong></span></button>`;
+  }).join("");
+  $("exitOpts").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+    exitPick = CONFIG.offers.find(o => o.id === b.dataset.id); renderExit();
+  }));
+}
+function showExit() {
+  if (EXIT.active || EXIT.done || exitDlg.open || dlg.open || store.get(EXIT.key + "_seen")) return;
+  if (Date.now() - exitStart < 8000) return;
+  store.set(EXIT.key + "_seen", String(Date.now()));
+  exitPick = selected; renderExit();
+  if (exitDlg.showModal) exitDlg.showModal(); else exitDlg.setAttribute("open", "");
+  document.body.style.overflow = "hidden";
+}
+const closeExit = () => exitDlg.close ? exitDlg.close() : exitDlg.removeAttribute("open");
+exitDlg.addEventListener("close", () => { if (!dlg.open) document.body.style.overflow = ""; });
+exitDlg.addEventListener("click", e => { if (e.target === exitDlg) closeExit(); });
+$("exitClose").addEventListener("click", closeExit);
+$("exitNo").addEventListener("click", () => {
+  closeExit();
+  if (window.zvVisitas) zvVisitas.track("click_cta", { label: "Descuento antes de irte: no lo quiso" });
+});
+$("exitYes").addEventListener("click", () => {
+  EXIT.active = true; store.set(EXIT.key + "_ok", String(Date.now()));
+  selected = exitPick; renderOffers(); updatePrice();
+  closeExit();
+  if (window.zvVisitas) zvVisitas.track("click_cta", { label: "Descuento antes de irte: lo aceptó" });
+  openCheckout();
+});
+document.addEventListener("mouseout", e => { if (!e.relatedTarget && e.clientY <= 0) showExit(); });
+let exitHiddenAt = 0;
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) exitHiddenAt = Date.now();
+  else if (exitHiddenAt && Date.now() - exitHiddenAt > 3000) setTimeout(showExit, 600);
+});
+let exitY = scrollY, exitT = Date.now(), exitMaxY = 0;
+addEventListener("scroll", () => {
+  const now = Date.now(), y = scrollY;
+  exitMaxY = Math.max(exitMaxY, y);
+  if ((exitY - y) / Math.max(1, now - exitT) > 2.5 && exitMaxY > innerHeight * 2) showExit();
+  exitY = y; exitT = now;
+}, { passive: true });
+let exitIdle = 0;
+const exitResetIdle = () => { clearTimeout(exitIdle); exitIdle = setTimeout(showExit, 40000); };
+["scroll", "touchstart", "mousemove", "keydown"].forEach(ev => addEventListener(ev, exitResetIdle, { passive: true }));
+exitResetIdle();
+dlg.addEventListener("close", () => { if ($("checkoutDone").hidden) setTimeout(showExit, 400); });
 
 if (CONFIG.recentOrders.length) {
   let k = 0;
