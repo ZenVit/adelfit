@@ -29,3 +29,8 @@ Las cinco imágenes suman 919.024 bytes en sus versiones WebP de mayor tamaño, 
 
 ## Galería principal
 La galería inicial contiene exactamente tres imágenes: frasco Adelfit, composición aprobada y fotografía real de la etiqueta. La composición no se repite como banner más abajo. Las otras cuatro piezas informativas aparecen una sola vez en sus secciones.
+
+## Secuencia lifestyle actual
+Las cinco piezas nuevas aparecen consecutivamente en `#adelfit-story`: propósito, alimentación, bienestar, fórmula y modo de uso. Reemplazan los banners dispersos anteriores; la galería inicial conserva exactamente las tres imágenes elegidas, centradas. Los prompts están en `docs/PROMPTS-LIFESTYLE-V4.md`.
+
+Los cinco WebP principales suman 1.015.324 bytes frente a 11.215.880 bytes de PNG (91 % menos). Hay derivadas de 540 y 810 px para `srcset`; las dimensiones se reservan y la carga es diferida. Las transcripciones se agrupan después de las cinco imágenes para no interrumpir su recorrido. La última imagen y el botón de compra abren el checkout existente. No se envió ningún pedido de prueba durante esta actualización.

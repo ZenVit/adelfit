@@ -217,6 +217,16 @@ section{padding:40px 0}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(max-width:599px){.wa-float{width:48px;height:48px;padding:11px;justify-content:center}.wa-float span{display:none}.feature-banner{margin-inline:12px}.feature-image{border-radius:10px}.feature-transcript{margin-inline:0}}
 
+/* Cinco piezas nuevas consecutivas, con alturas naturales y carga diferida. */
+.adelfit-story{max-width:640px;padding:0;margin:0 auto 30px}
+.lifestyle-sequence{display:flex;flex-direction:column;gap:12px}
+.lifestyle-sequence .feature-banner{max-width:none;margin:0;padding:0}
+.lifestyle-sequence .feature-image{width:100%;height:auto;object-fit:contain}
+.story-image-button{display:block;border:0;padding:0;margin:0;width:100%;background:none;cursor:pointer;border-radius:12px;overflow:hidden}
+.story-note{font-size:11px;color:var(--muted);text-align:center;padding:8px 12px}
+.story-text{padding:0 12px}
+@media(max-width:663px){.adelfit-story{margin-inline:12px}.lifestyle-sequence{gap:8px}}
+
 /* ---------- Dolores ---------- */
 .pain__kicker{display:block;text-align:center;font-size:12px;font-weight:800;letter-spacing:1.5px;color:var(--brand);margin-bottom:6px}
 .pain h2{font-weight:900;font-size:clamp(20px,5vw,28px)}
@@ -430,7 +440,21 @@ fbq('track', 'ViewContent', { content_name: 'Adelfit', content_type: 'product', 
 
 <div class="divider"></div>
 
-<!-- 4. Señales de alerta (dolores) -->
+<section class="adelfit-story" id="adelfit-story" aria-labelledby="story-heading">
+<h2 class="sr-only" id="story-heading">Conocé Adelfit y cómo incorporarlo a tu rutina</h2>
+<div class="lifestyle-sequence">
+<section class="feature-banner" data-story="1" aria-labelledby="story-title-1"><h3 class="sr-only" id="story-title-1">Â¿Para quÃ© sirve Adelfit?</h3><figure><img class="feature-image" src="img/adelfit-lifestyle-01-proposito-v4.webp" srcset="img/adelfit-lifestyle-01-proposito-v4-540.webp 540w, img/adelfit-lifestyle-01-proposito-v4-810.webp 810w, img/adelfit-lifestyle-01-proposito-v4.webp 1080w" sizes="(min-width: 664px) 640px, calc(100vw - 24px)" width="1080" height="1350" alt="Adelfit como suplemento alimentario para complementar la alimentaciÃ³n junto a hÃ¡bitos saludables. Imagen ilustrativa." loading="lazy" decoding="async"></figure></section>
+<section class="feature-banner" data-story="2" aria-labelledby="story-title-2"><h3 class="sr-only" id="story-title-2">HÃ¡bitos de alimentaciÃ³n</h3><figure><img class="feature-image" src="img/adelfit-lifestyle-02-alimentacion-v4.webp" srcset="img/adelfit-lifestyle-02-alimentacion-v4-540.webp 540w, img/adelfit-lifestyle-02-alimentacion-v4-810.webp 810w, img/adelfit-lifestyle-02-alimentacion-v4.webp 1080w" sizes="(min-width: 664px) 640px, calc(100vw - 24px)" width="1080" height="1350" alt="Mujer adulta preparando una comida variada junto al frasco de Adelfit. Complemento alimentario, sin promesas de controlar el apetito. Imagen ilustrativa." loading="lazy" decoding="async"></figure></section>
+<section class="feature-banner" data-story="3" aria-labelledby="story-title-3"><h3 class="sr-only" id="story-title-3">Tu momento de bienestar</h3><figure><img class="feature-image" src="img/adelfit-lifestyle-03-bienestar-v4.webp" srcset="img/adelfit-lifestyle-03-bienestar-v4-540.webp 540w, img/adelfit-lifestyle-03-bienestar-v4-810.webp 810w, img/adelfit-lifestyle-03-bienestar-v4.webp 1080w" sizes="(min-width: 664px) 640px, calc(100vw - 24px)" width="1080" height="1350" alt="Mujer adulta disfrutando una pausa con agua e infusiÃ³n en un ambiente luminoso, con Adelfit en primer plano. Imagen ilustrativa." loading="lazy" decoding="async"></figure></section>
+<section class="feature-banner" data-story="4" aria-labelledby="story-title-4"><h3 class="sr-only" id="story-title-4">Ingredientes de la fÃ³rmula</h3><figure><img class="feature-image" src="img/adelfit-lifestyle-04-formula-v4.webp" srcset="img/adelfit-lifestyle-04-formula-v4-540.webp 540w, img/adelfit-lifestyle-04-formula-v4-810.webp 810w, img/adelfit-lifestyle-04-formula-v4.webp 1080w" sizes="(min-width: 664px) 640px, calc(100vw - 24px)" width="1080" height="1350" alt="FÃ³rmula de Adelfit: psyllium, FOS, espirulina, quitosana, cromo, Chlorella vulgaris y extracto de naranja moro. Imagen ilustrativa." loading="lazy" decoding="async"></figure></section>
+<section class="feature-banner" data-story="5" aria-labelledby="story-title-5"><h3 class="sr-only" id="story-title-5">Modo de uso y pedido</h3><figure><button type="button" class="story-image-button" data-order-open aria-label="Elegir mi combo de Adelfit"><img class="feature-image" src="img/adelfit-lifestyle-05-rutina-v4.webp" srcset="img/adelfit-lifestyle-05-rutina-v4-540.webp 540w, img/adelfit-lifestyle-05-rutina-v4-810.webp 810w, img/adelfit-lifestyle-05-rutina-v4.webp 1080w" sizes="(min-width: 664px) 640px, calc(100vw - 24px)" width="1080" height="1350" alt="Adelfit en una rutina cotidiana: revisar la etiqueta, seguir el modo de empleo e hidratarse. Pedido con pago al recibir. Imagen ilustrativa." loading="lazy" decoding="async"></button></figure></section>
+</div>
+<button type="button" class="cta feature-cta" data-order-open>Elegir mi combo · Pago al recibir</button>
+<p class="story-note">Imágenes ilustrativas generadas con IA. Las personas representadas no son testimonios de clientes.</p>
+<div class="story-text" aria-label="Información de las imágenes en texto"><details class="feature-transcript"><summary>Â¿Para quÃ© sirve Adelfit?</summary><p>Adelfit es un suplemento alimentario para complementar tu alimentaciÃ³n, junto a hÃ¡bitos saludables. Un formato prÃ¡ctico para tu rutina de bienestar. Cada frasco contiene 60 cÃ¡psulas. ConsultÃ¡ los ingredientes y el modo de empleo en el envase.</p></details><details class="feature-transcript"><summary>HÃ¡bitos de alimentaciÃ³n</summary><p>ElegÃ­ hÃ¡bitos que puedas mantener. PlanificÃ¡ tus comidas y buscÃ¡ una alimentaciÃ³n variada y equilibrada. Adelfit es un complemento alimentario para acompaÃ±ar tu rutina. No reemplaza una alimentaciÃ³n variada.</p></details><details class="feature-transcript"><summary>Tu momento de bienestar</summary><p>HacÃ© espacio para tu bienestar. HidrataciÃ³n, descanso y movimiento: pequeÃ±os hÃ¡bitos para tu dÃ­a. Adelfit en cÃ¡psulas, para complementar tu alimentaciÃ³n. Suplemento alimentario. SeguÃ­ las indicaciones del fabricante.</p></details><details class="feature-transcript"><summary>Ingredientes de la fÃ³rmula</summary><p>ConocÃ© la fÃ³rmula de Adelfit. Ingredientes declarados en el envase: psyllium y FOS; espirulina y Chlorella vulgaris; cromo y extracto de naranja moro. TambiÃ©n contiene quitosana y gelatina. Declara derivados de crustÃ¡ceos; consultÃ¡ todos los ingredientes y alÃ©rgenos en la etiqueta.</p></details><details class="feature-transcript"><summary>Modo de uso y pedido</summary><p>Sumalo a tu rutina diaria. RevisÃ¡ la etiqueta, seguÃ­ el modo de empleo del fabricante y acompaÃ±Ã¡ tus hÃ¡bitos con hidrataciÃ³n. No superes la cantidad indicada en el envase. PedÃ­ el tuyo hoy: envÃ­o gratis a Paraguay y pago al recibir. Si tenÃ©s alergias, tomÃ¡s medicaciÃ³n, estÃ¡s embarazada o en lactancia, consultÃ¡ con un profesional.</p></details></div>
+</section>
+
+<!-- Hábitos y detalles del producto -->
 <section class="pain">
   <div class="wrap">
     <span class="pain__kicker" id="painKicker"></span>
@@ -440,24 +464,6 @@ fbq('track', 'ViewContent', { content_name: 'Adelfit', content_type: 'product', 
 </section>
 
 <div class="divider on-brand"></div>
-<!-- 5. Banners de imágenes #2 y #3 -->
-<section class="feature-banner" data-feature="1" aria-labelledby="feature-title-1">
-  <h2 class="sr-only" id="feature-title-1">Qué recibís con tu pedido</h2>
-  <figure>
-    <img class="feature-image" src="img/adelfit-presentacion-v3.webp" srcset="img/adelfit-presentacion-v3-560.webp 560w, img/adelfit-presentacion-v3-840.webp 840w, img/adelfit-presentacion-v3.webp 1120w" sizes="(min-width: 600px) 560px, calc(100vw - 24px)" width="1120" height="1400" alt="Presentación de Adelfit: 60 cápsulas por frasco y 500 mg de contenido por cápsula, según el envase." loading="lazy" decoding="async">
-    <figcaption><details class="feature-transcript"><summary>Leer la información en texto</summary><p>Cada frasco contiene 60 cápsulas. El envase declara 500 mg por cápsula: es el contenido total, no una dosis de un ingrediente específico.</p><p>Elegí 1 frasco (60 cápsulas), 2 (120 cápsulas) o 3 (180 cápsulas). Consultá la etiqueta para conocer la composición completa.</p></details></figcaption>
-  </figure>
-
-</section>
-<div class="divider on-brand"></div>
-<section class="feature-banner" data-feature="2" aria-labelledby="feature-title-2">
-  <h2 class="sr-only" id="feature-title-2">Cómo incorporarlo a tu rutina</h2>
-  <figure>
-    <img class="feature-image" src="img/adelfit-rutina-v3.webp" srcset="img/adelfit-rutina-v3-560.webp 560w, img/adelfit-rutina-v3-840.webp 840w, img/adelfit-rutina-v3.webp 1120w" sizes="(min-width: 600px) 560px, calc(100vw - 24px)" width="1120" height="1400" alt="Uso de Adelfit: leer el envase, seguir las indicaciones del fabricante y acompañar hábitos equilibrados. Contiene gelatina y derivados de crustáceos." loading="lazy" decoding="async">
-    <figcaption><details class="feature-transcript"><summary>Leer la información en texto</summary><ol><li>Leé el envase y revisá los ingredientes y el modo de empleo.</li><li>Seguí la cantidad indicada por el fabricante.</li><li>Acompañá una alimentación equilibrada y movimiento diario.</li></ol><p>Contiene gelatina y derivados de crustáceos. Puede contener piñón, soja, pescado y huevo. Si tenés alergias, tomás medicación, estás embarazada o en lactancia, consultá con un profesional.</p></details></figcaption>
-  </figure>
-
-</section>
 
 <!-- 6. Pestañas de contenido -->
 <section>
@@ -478,15 +484,6 @@ fbq('track', 'ViewContent', { content_name: 'Adelfit', content_type: 'product', 
 </section>
 
 <div class="divider on-brand"></div>
-<!-- 8. Banner de imágenes #4 -->
-<section class="feature-banner" data-feature="3" aria-labelledby="feature-title-3">
-  <h2 class="sr-only" id="feature-title-3">Compará los combos y el ahorro</h2>
-  <figure>
-    <img class="feature-image" src="img/adelfit-combos-v3.webp" srcset="img/adelfit-combos-v3-560.webp 560w, img/adelfit-combos-v3-840.webp 840w, img/adelfit-combos-v3.webp 1120w" sizes="(min-width: 600px) 560px, calc(100vw - 24px)" width="1120" height="1400" alt="Combos Adelfit: 1 frasco por Gs. 159.000; 2 por Gs. 259.000; 3 por Gs. 320.000. Envío gratis y pago al recibir." loading="lazy" decoding="async">
-    <figcaption><details class="feature-transcript"><summary>Leer la información en texto</summary><ul><li><strong>1 frasco:</strong> Gs. 159.000. Total: 60 cápsulas.</li><li><strong>2 frascos:</strong> Gs. 259.000, equivalente a Gs. 129.500 por frasco. Ahorrás Gs. 59.000 frente a comprarlos por separado. Total: 120 cápsulas.</li><li><strong>3 frascos:</strong> Gs. 320.000, aproximadamente Gs. 106.667 por frasco. Ahorrás Gs. 157.000 frente a comprarlos por separado. Total: 180 cápsulas.</li></ul><p>Los tres combos incluyen envío gratis a todo Paraguay y pago al recibir.</p></details></figcaption>
-  </figure>
-  <button type="button" class="cta feature-cta" data-order-open>Elegir mi combo · Pago al recibir</button>
-</section>
 
 <!-- 9. Ticker inferior -->
 <div class="ticker soft" id="ticker2" aria-label="Mensajes de marca"></div>
@@ -502,15 +499,6 @@ fbq('track', 'ViewContent', { content_name: 'Adelfit', content_type: 'product', 
   </div>
 </section>
 
-<!-- 11. Banner de imágenes #5 -->
-<section class="feature-banner" data-feature="4" aria-labelledby="feature-title-4">
-  <h2 class="sr-only" id="feature-title-4">Cómo pedir y pagar al recibir</h2>
-  <figure>
-    <img class="feature-image" src="img/adelfit-compra-v3.webp" srcset="img/adelfit-compra-v3-560.webp 560w, img/adelfit-compra-v3-840.webp 840w, img/adelfit-compra-v3.webp 1120w" sizes="(min-width: 600px) 560px, calc(100vw - 24px)" width="1120" height="1400" alt="Compra de Adelfit en tres pasos: elegir combo y registrar el pedido, confirmar por WhatsApp y pagar al recibir. Envío gratis a Paraguay." loading="lazy" decoding="async">
-    <figcaption><details class="feature-transcript"><summary>Leer la información en texto</summary><ol><li>Elegí tu combo y completá tus datos de entrega.</li><li>Confirmá por WhatsApp con tu número de pedido para coordinar la entrega.</li><li>Recibí el paquete y aboná al entregarlo.</li></ol><p>Envío gratis a todo Paraguay. Sin pago por adelantado. Tu pedido queda registrado al completar el formulario correctamente.</p></details></figcaption>
-  </figure>
-  <button type="button" class="cta feature-cta" data-order-open>Elegir mi combo · Pago al recibir</button>
-</section>
 <div class="divider on-brand"></div>
 
 <!-- 12. Reseñas -->
