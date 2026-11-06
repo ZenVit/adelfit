@@ -326,7 +326,7 @@ fbq('track', 'ViewContent', { content_name: 'Adelfit', content_type: 'product', 
       <div class="gallery__main" id="galleryMain">
         <div class="gallery__badges" id="badges"></div>
       </div>
-      <div class="gallery__thumbs" id="thumbs"></div><p class="gallery__note">Imágenes ilustrativas. La última foto muestra la etiqueta real del producto.</p>
+      <div class="gallery__thumbs" id="thumbs"></div><p class="gallery__note">Las dos primeras imágenes son ilustrativas. La tercera muestra la etiqueta real del producto.</p>
     </div>
 
     <div>
@@ -428,16 +428,6 @@ fbq('track', 'ViewContent', { content_name: 'Adelfit', content_type: 'product', 
   </div>
 </dialog>
 
-<div class="divider"></div>
-<!-- 3. Banner de imágenes #1 -->
-<section class="feature-banner" data-feature="0" aria-labelledby="feature-title-0">
-  <h2 class="sr-only" id="feature-title-0">Qué contiene Adelfit</h2>
-  <figure>
-    <img class="feature-image" src="img/adelfit-composicion-banner-v2.webp" srcset="img/adelfit-composicion-banner-v2-560.webp 560w, img/adelfit-composicion-banner-v2-840.webp 840w, img/adelfit-composicion-banner-v2.webp 1120w" sizes="(min-width: 600px) 560px, calc(100vw - 24px)" width="1120" height="1400" alt="Adelfit: psyllium y FOS, espirulina y Chlorella, cromo y extracto de naranja moro. 60 cápsulas por frasco." loading="lazy" decoding="async">
-    <figcaption><details class="feature-transcript"><summary>Leer la información en texto</summary><p>Adelfit de Natural Caps contiene psyllium, FOS, espirulina, quitosana, cromo, ácido alfa-linolénico n-3 obtenido de Chlorella vulgaris y extracto de naranja moro. Cada frasco contiene 60 cápsulas.</p><p>Es un suplemento alimentario para acompañar una alimentación equilibrada y hábitos activos. Consultá la composición completa, los alérgenos y el modo de empleo en el envase.</p></details></figcaption>
-  </figure>
-
-</section>
 <div class="divider"></div>
 
 <!-- 4. Señales de alerta (dolores) -->
@@ -564,8 +554,8 @@ const CONFIG = {
     name: "Adelfit – Fórmula premium · Natural Caps",
     proof: "Suplemento alimentario · 60 cápsulas por frasco",
     badges: [],
-    images: ["img/producto-1.webp", "img/adelfit-composicion-banner-v2.webp", "img/adelfit-presentacion-v3.webp", "img/adelfit-rutina-v3.webp", "img/adelfit-combos-v3.webp", "img/adelfit-compra-v3.webp", "img/etiqueta-real.jpg"],
-    imageAlts: ["Frasco Adelfit Natural Caps de 60 cápsulas. Imagen ilustrativa.", "Adelfit: psyllium y FOS, espirulina y Chlorella, cromo y extracto de naranja moro. 60 cápsulas por frasco.", "Presentación de Adelfit: 60 cápsulas por frasco y 500 mg de contenido por cápsula, según el envase.", "Uso de Adelfit: leer el envase, seguir las indicaciones del fabricante y acompañar hábitos equilibrados. Contiene gelatina y derivados de crustáceos.", "Combos Adelfit: 1 frasco por Gs. 159.000; 2 por Gs. 259.000; 3 por Gs. 320.000. Envío gratis y pago al recibir.", "Compra de Adelfit en tres pasos: elegir combo, enviar el resumen por WhatsApp y pagar cuando se recibe el paquete. Envío gratis a Paraguay.", "Fotografía real de ingredientes y alérgenos del envase de Adelfit."],
+    images: ["img/producto-1.webp", "img/adelfit-composicion-banner-v2.webp", "img/etiqueta-real.jpg"],
+    imageAlts: ["Frasco Adelfit Natural Caps de 60 cápsulas. Imagen ilustrativa.", "Adelfit: psyllium y FOS, espirulina y Chlorella, cromo y extracto de naranja moro. 60 cápsulas por frasco.", "Fotografía real de ingredientes y alérgenos del envase de Adelfit."],
     chips: [
       { icon: "🌿", title: "Con ingredientes de origen vegetal", text: "Psyllium, espirulina, FOS y extracto de naranja moro, entre otros ingredientes" },
       { icon: "💊", title: "60 cápsulas por frasco", text: "Formato práctico para acompañar tu alimentación y tus hábitos" },
@@ -705,7 +695,6 @@ function showImage(i) {
   if (i === 0) main.querySelector("img")?.setAttribute("fetchpriority", "high");
   [...$("thumbs").children].forEach((b, j) => b.setAttribute("aria-current", j === i));
 }
-$("thumbs").style.gridTemplateColumns = `repeat(${Math.max(P.images.length, 5)}, 1fr)`;
 $("thumbs").innerHTML = P.images.map((s, i) => `<button type="button" aria-label="Ver foto ${i + 1}">${img(s, P.imageAlts[i] || "", "")}</button>`).join("");
 [...$("thumbs").children].forEach((b, i) => b.addEventListener("click", () => showImage(i)));
 showImage(0);

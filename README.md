@@ -26,3 +26,6 @@ Preparada para GitHub Pages, rama `main`, raíz `/`. No contiene credenciales pr
 Se integraron el banner de composición aprobado y cuatro piezas nuevas: presentación, uso y precauciones, comparación de combos y proceso de compra. Los prompts exactos están en `docs/PROMPTS-BANNERS-V3.md` y `docs/PROMPT-BANNER-V2.md`. Los textos también se ofrecen en HTML desplegable, con botones de compra accesibles.
 
 Las cinco imágenes suman 919.024 bytes en sus versiones WebP de mayor tamaño, frente a 9.965.780 bytes de los originales PNG (91 % menos). Se incluyen versiones de 560, 840 y 1120 px y miniaturas de 160 px. La web elige con `srcset`/`sizes`, carga los banners diferidamente y reserva sus dimensiones. La primera imagen del producto tiene precarga y prioridad alta. Los originales de generación se conservan localmente; no se descargan como parte de la página.
+
+## Galería principal
+La galería inicial contiene exactamente tres imágenes: frasco Adelfit, composición aprobada y fotografía real de la etiqueta. La composición no se repite como banner más abajo. Las otras cuatro piezas informativas aparecen una sola vez en sus secciones.
