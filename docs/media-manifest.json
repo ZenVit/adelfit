@@ -1,0 +1,242 @@
+{
+  "img/adelfit-composicion-banner-v2.webp": {
+    "width": 1120,
+    "height": 1400,
+    "variants": [
+      {
+        "src": "img/adelfit-composicion-banner-v2-160.webp",
+        "width": 160,
+        "height": 200,
+        "bytes": 11090
+      },
+      {
+        "src": "img/adelfit-composicion-banner-v2-560.webp",
+        "width": 560,
+        "height": 700,
+        "bytes": 71354
+      },
+      {
+        "src": "img/adelfit-composicion-banner-v2-840.webp",
+        "width": 840,
+        "height": 1050,
+        "bytes": 129070
+      },
+      {
+        "src": "img/adelfit-composicion-banner-v2.webp",
+        "width": 1120,
+        "height": 1400,
+        "bytes": 188458
+      }
+    ]
+  },
+  "img/adelfit-presentacion-v3.webp": {
+    "width": 1120,
+    "height": 1400,
+    "variants": [
+      {
+        "src": "img/adelfit-presentacion-v3-160.webp",
+        "width": 160,
+        "height": 200,
+        "bytes": 11488
+      },
+      {
+        "src": "img/adelfit-presentacion-v3-560.webp",
+        "width": 560,
+        "height": 700,
+        "bytes": 68670
+      },
+      {
+        "src": "img/adelfit-presentacion-v3-840.webp",
+        "width": 840,
+        "height": 1050,
+        "bytes": 121582
+      },
+      {
+        "src": "img/adelfit-presentacion-v3.webp",
+        "width": 1120,
+        "height": 1400,
+        "bytes": 175382
+      }
+    ]
+  },
+  "img/adelfit-rutina-v3.webp": {
+    "width": 1120,
+    "height": 1400,
+    "variants": [
+      {
+        "src": "img/adelfit-rutina-v3-160.webp",
+        "width": 160,
+        "height": 200,
+        "bytes": 12426
+      },
+      {
+        "src": "img/adelfit-rutina-v3-560.webp",
+        "width": 560,
+        "height": 700,
+        "bytes": 80882
+      },
+      {
+        "src": "img/adelfit-rutina-v3-840.webp",
+        "width": 840,
+        "height": 1050,
+        "bytes": 141072
+      },
+      {
+        "src": "img/adelfit-rutina-v3.webp",
+        "width": 1120,
+        "height": 1400,
+        "bytes": 201666
+      }
+    ]
+  },
+  "img/adelfit-combos-v3.webp": {
+    "width": 1120,
+    "height": 1400,
+    "variants": [
+      {
+        "src": "img/adelfit-combos-v3-160.webp",
+        "width": 160,
+        "height": 200,
+        "bytes": 12608
+      },
+      {
+        "src": "img/adelfit-combos-v3-560.webp",
+        "width": 560,
+        "height": 700,
+        "bytes": 77318
+      },
+      {
+        "src": "img/adelfit-combos-v3-840.webp",
+        "width": 840,
+        "height": 1050,
+        "bytes": 130164
+      },
+      {
+        "src": "img/adelfit-combos-v3.webp",
+        "width": 1120,
+        "height": 1400,
+        "bytes": 183540
+      }
+    ]
+  },
+  "img/adelfit-compra-v3.webp": {
+    "width": 1120,
+    "height": 1400,
+    "variants": [
+      {
+        "src": "img/adelfit-compra-v3-160.webp",
+        "width": 160,
+        "height": 200,
+        "bytes": 12026
+      },
+      {
+        "src": "img/adelfit-compra-v3-560.webp",
+        "width": 560,
+        "height": 700,
+        "bytes": 71462
+      },
+      {
+        "src": "img/adelfit-compra-v3-840.webp",
+        "width": 840,
+        "height": 1050,
+        "bytes": 120870
+      },
+      {
+        "src": "img/adelfit-compra-v3.webp",
+        "width": 1120,
+        "height": 1400,
+        "bytes": 169978
+      }
+    ]
+  },
+  "img/producto-1.webp": {
+    "width": 1000,
+    "height": 1250,
+    "variants": [
+      {
+        "src": "img/producto-1-160.webp",
+        "width": 160,
+        "height": 200,
+        "bytes": 6606
+      },
+      {
+        "src": "img/producto-1-560.webp",
+        "width": 560,
+        "height": 700,
+        "bytes": 34718
+      },
+      {
+        "src": "img/producto-1-840.webp",
+        "width": 840,
+        "height": 1050,
+        "bytes": 57144
+      },
+      {
+        "src": "img/producto-1.webp",
+        "width": 1000,
+        "height": 1250,
+        "bytes": 81684
+      }
+    ]
+  },
+  "img/combo-2.webp": {
+    "width": 1000,
+    "height": 1250,
+    "variants": [
+      {
+        "src": "img/combo-2-160.webp",
+        "width": 160,
+        "height": 200,
+        "bytes": 7138
+      },
+      {
+        "src": "img/combo-2-560.webp",
+        "width": 560,
+        "height": 700,
+        "bytes": 38386
+      },
+      {
+        "src": "img/combo-2-840.webp",
+        "width": 840,
+        "height": 1050,
+        "bytes": 65182
+      },
+      {
+        "src": "img/combo-2.webp",
+        "width": 1000,
+        "height": 1250,
+        "bytes": 90972
+      }
+    ]
+  },
+  "img/combo-3.webp": {
+    "width": 1000,
+    "height": 1250,
+    "variants": [
+      {
+        "src": "img/combo-3-160.webp",
+        "width": 160,
+        "height": 200,
+        "bytes": 7552
+      },
+      {
+        "src": "img/combo-3-560.webp",
+        "width": 560,
+        "height": 700,
+        "bytes": 42900
+      },
+      {
+        "src": "img/combo-3-840.webp",
+        "width": 840,
+        "height": 1050,
+        "bytes": 71130
+      },
+      {
+        "src": "img/combo-3.webp",
+        "width": 1000,
+        "height": 1250,
+        "bytes": 99738
+      }
+    ]
+  }
+}
